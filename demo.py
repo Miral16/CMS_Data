@@ -116,36 +116,67 @@ with col2:
 #     st.plotly_chart(fig2)
 
 
+
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
 
-# Plotly Express bar chart
-fig = px.bar(
-    Prototype,
-    x='Month',
-    y=['COVID 19 Hospitalization Rate in Exposed Population (%)', 'COVID 19 Hospitalization Rate in Unexposed Population (%)'],
-    barmode='stack',
-    title='COVID and All Hospitalization Rates',
-    hover_data={
-        'Month': False,  # Exclude Month from tooltip
-        'COVID 19 Hospitalization Rate in Exposed Population (%)': ':.2%',  # Format tooltip as percentage
-        'COVID 19 Hospitalization Rate in Unexposed Population (%)': ':.2%',  # Format tooltip as percentage
-    }
-)
+# Create stacked bar charts
+fig = go.Figure()
+fig.add_trace(go.Bar(
+    x=Prototype['Month'],
+    y=Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'],
+    name='COVID Hospitalization Rate',
+    marker_color='orange',
+    hovertemplate='COVID 19 Hospitalization Rate in Exposed Population: %{y:.2%}<extra></extra>',
+))
+fig.add_trace(go.Bar(
+    x=Prototype['Month'],
+    y=Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'],
+    name='All Hospitalization Rate',
+    marker_color='blue',
+    hovertemplate='COVID 19 Hospitalization Rate in Unexposed Population: %{y:.2%}<extra></extra>',
+))
 
-# Plotly Express line chart
-fig.add_scatter(
+# Create line chart
+fig.add_trace(go.Scatter(
     x=Prototype['Month'],
     y=Prototype['BA.2 Variant Proportion'],
-    mode='lines+markers',
     name='BA.2 Variant Proportion',
-    hovertemplate='BA.2 Variant Proportion: %{y}',
+    mode='lines+markers',
+    line=dict(color='red'),
+    hovertemplate='BA.2 Variant Proportion: %{y}<extra></extra>',
     yaxis='y2',
+))
+
+# Add vertical lines on hover
+fig.update_layout(
+    hovermode='closest',
+    hoverdistance=0,  # Ensure the hover is activated directly on the bars or lines
+    spikedistance=0,
 )
+
+for i, month in enumerate(Prototype['Month']):
+    fig.add_shape(
+        type="line",
+        x0=month,
+        x1=month,
+        y0=0,
+        y1=1,
+        xref="x",
+        yref="paper",
+        line=dict(color="black", width=1),
+        opacity=0.5,
+        hovertemplate='<b>%{x}</b><extra></extra>',
+        showlegend=False,
+        name='',
+        layer='below',
+    )
 
 # Configure layout
 fig.update_layout(
+    barmode='stack',
+    title='COVID and All Hospitalization Rates',
     xaxis=dict(title='Month'),
     yaxis=dict(title='Hospitalization Rate (%)', tickformat='%'),
     yaxis2=dict(title='Variant Proportion', overlaying='y', side='right'),
