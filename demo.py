@@ -141,11 +141,21 @@ fig.add_trace(go.Bar(
 # Create line chart
 fig.add_trace(go.Scatter(
     x=Prototype['Month'],
-    y=Prototype['BA.2 Variant Proportion','BA.1 Variant Proportion'],
-    name='BA.2 Variant Proportion','BA.1 Variant Proportion'
+    y=Prototype['BA.2 Variant Proportion'],
+    name='BA.2 Variant Proportion',
     mode='lines+markers',
     line=dict(color='red'),
-    hovertemplate='BA.2 Variant Proportion: %{y}<extra></extra>','BA.2 Variant Proportion: %{y}<extra></extra>',
+    hovertemplate='BA.2 Variant Proportion: %{y}<extra></extra>',
+    yaxis='y2',
+))
+
+fig.add_trace(go.Scatter(
+    x=Prototype['Month'],
+    y=Prototype['BA.1 Variant Proportion'],
+    name='BA.1 Variant Proportion',
+    mode='lines+markers',
+    line=dict(color='green'),
+    hovertemplate='BA.1 Variant Proportion: %{y}<extra></extra>',
     yaxis='y2',
 ))
 
