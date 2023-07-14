@@ -126,9 +126,12 @@ from bokeh.models import HoverTool
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
 
+# Convert Month column to a list
+months = Prototype['Month'].tolist()
+
 # Create figure
 p = figure(
-    x_range=Prototype['Month'],
+    x_range=months,  # Pass the list of months
     title='COVID and All Hospitalization Rates',
     plot_width=600,
     plot_height=400,
@@ -151,7 +154,7 @@ p.vbar_stack(
 
 # Line chart
 p.line(
-    x=Prototype['Month'],
+    x=months,  # Pass the list of months
     y=Prototype['BA.2 Variant Proportion'],
     color='red',
     legend_label='BA.2 Variant Proportion',
