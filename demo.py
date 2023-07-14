@@ -115,27 +115,48 @@ with col2:
 # )
 #     st.plotly_chart(fig2)
 
-# Melt the DataFrame to long format for stacked bar chart
-df_melted = Prototype.melt('Month', var_name='Measure', value_name='Value')
 
-# Create the stacked bar chart
-bars = alt.Chart(df_melted).mark_bar().encode(
-    x='Month:N',
-    y=alt.Y('Value:Q', axis=alt.Axis(format='.0%'), stack=None, title='Percentage'),
-    color='Measure:N',
-    tooltip=['Month', 'Measure', alt.Tooltip('Value:Q', format='.2%')],
-).properties(width=600)
+# Calculate hospitalization rates as percentages
+Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
+Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
 
-# Create the line chart
-line = alt.Chart(Prototype).mark_line(color='red').encode(
-    x='Month:N',
-    y=alt.Y('BA.2 Variant Proportion:Q', axis=alt.Axis(title='Variant Proportion')),
-    tooltip=['Month', 'BA.2 Variant Proportion:Q'],
+# Create stacked bar charts
+fig = go.Figure()
+fig.add_trace(go.Bar(
+    x=Prototype['Month'],
+    y=Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'],
+    name='COVID Hospitalization Rate',
+    marker_color='orange',
+    hovertemplate='%{y:.0%}',
+))
+fig.add_trace(go.Bar(
+    x=Prototype['Month'],
+    y=Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'],
+    name='All Hospitalization Rate',
+    marker_color='blue',
+    hovertemplate='%{y:.0%}',
+))
+
+# Create line chart
+fig.add_trace(go.Scatter(
+    x=Prototype['Month'],
+    y=Prototype['BA.2 Variant Proportion'],
+    name='BA.2 Variant Proportion',
+    mode='lines+markers',
+    line=dict(color='red'),
+    hovertemplate='%{y}',
+    yaxis='y2',
+))
+
+# Configure layout
+fig.update_layout(
+    barmode='stack',
+    title='COVID and All Hospitalization Rates',
+    xaxis=dict(title='Month'),
+    yaxis=dict(title='Hospitalization Rate (%)', tickformat='%'),
+    yaxis2=dict(title='Variant Proportion', overlaying='y', side='right'),
 )
 
-# Combine the charts
-chart = alt.layer(bars, line).resolve_scale(y='independent')
-
 # Display the chart using Streamlit
-st.altair_chart(chart, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
