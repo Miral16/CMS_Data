@@ -116,6 +116,7 @@ with col2:
 #     st.plotly_chart(fig2)
 
 
+
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
@@ -150,7 +151,7 @@ fig.add_trace(go.Scatter(
 
 # Add vertical lines on hover
 fig.update_layout(
-    hovermode='x',
+    hovermode='closest',
     hoverdistance=0,  # Ensure the hover is activated directly on the bars or lines
     spikedistance=0,
 )
@@ -172,6 +173,25 @@ for i, month in enumerate(Prototype['Month']):
         layer='below',
     )
 
+    fig.add_annotation(
+        x=month,
+        y=1,
+        xref="x",
+        yref="paper",
+        text=f"{Prototype['Month'][i]}",
+        showarrow=False,
+        font=dict(size=12),
+        opacity=0,
+        align='center',
+        valign='middle',
+        hovertext=(
+            f"COVID 19 Hospitalization Rate in Exposed Population: {Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'][i]:.2%}<br>"
+            f"COVID 19 Hospitalization Rate in Unexposed Population: {Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'][i]:.2%}<br>"
+            f"BA.2 Variant Proportion: {Prototype['BA.2 Variant Proportion'][i]}"
+        ),
+        name='',
+        layer='below',
+    )
 
 # Configure layout
 fig.update_layout(
