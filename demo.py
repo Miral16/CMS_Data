@@ -116,55 +116,41 @@ with col2:
 #     st.plotly_chart(fig2)
 
 
-import bokeh
-
-from bokeh.plotting import figure, show
-from bokeh.models import HoverTool
-
-
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
 
-# Convert Month column to a list
-months = Prototype['Month'].tolist()
-
-# Create figure
-p = figure(
-    x_range=months,  # Pass the list of months
-    title='COVID and All Hospitalization Rates',
-    plot_width=600,
-    plot_height=400,
-    tooltips=[
-        ('COVID 19 Hospitalization Rate in Exposed Population (%)', '@{COVID 19 Hospitalization Rate in Exposed Population (%)}{0.2%}'),
-        ('COVID 19 Hospitalization Rate in Unexposed Population (%)', '@{COVID 19 Hospitalization Rate in Unexposed Population (%)}{0.2%}'),
-        ('BA.2 Variant Proportion', '@{BA.2 Variant Proportion}'),
-    ]
-)
-
-# Stacked bar chart
-p.vbar_stack(
-    stackers=['COVID 19 Hospitalization Rate in Exposed Population (%)', 'COVID 19 Hospitalization Rate in Unexposed Population (%)'],
+# Plotly Express bar chart
+fig = px.bar(
+    Prototype,
     x='Month',
-    width=0.9,
-    color=['orange', 'blue'],
-    source=Prototype,
-    legend_label=['COVID Hospitalization Rate', 'All Hospitalization Rate'],
+    y=['COVID 19 Hospitalization Rate in Exposed Population (%)', 'COVID 19 Hospitalization Rate in Unexposed Population (%)'],
+    barmode='stack',
+    title='COVID and All Hospitalization Rates',
+    hover_data={
+        'Month': False,  # Exclude Month from tooltip
+        'COVID 19 Hospitalization Rate in Exposed Population (%)': ':.2%',  # Format tooltip as percentage
+        'COVID 19 Hospitalization Rate in Unexposed Population (%)': ':.2%',  # Format tooltip as percentage
+    }
 )
 
-# Line chart
-p.line(
-    x=months,  # Pass the list of months
+# Plotly Express line chart
+fig.add_scatter(
+    x=Prototype['Month'],
     y=Prototype['BA.2 Variant Proportion'],
-    color='red',
-    legend_label='BA.2 Variant Proportion',
+    mode='lines+markers',
+    name='BA.2 Variant Proportion',
+    hovertemplate='BA.2 Variant Proportion: %{y}',
+    yaxis='y2',
 )
 
 # Configure layout
-p.xaxis.axis_label = 'Month'
-p.yaxis[0].axis_label = 'Hospitalization Rate (%)'
-p.yaxis[1].axis_label = 'Variant Proportion'
+fig.update_layout(
+    xaxis=dict(title='Month'),
+    yaxis=dict(title='Hospitalization Rate (%)', tickformat='%'),
+    yaxis2=dict(title='Variant Proportion', overlaying='y', side='right'),
+)
 
 # Display the chart using Streamlit
-st.bokeh_chart(p, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
