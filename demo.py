@@ -117,6 +117,7 @@ with col2:
 
 
 import bokeh
+
 from bokeh.plotting import figure, show
 from bokeh.models import HoverTool
 
