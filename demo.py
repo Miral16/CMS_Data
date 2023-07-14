@@ -156,23 +156,6 @@ fig.update_layout(
     spikedistance=0,
 )
 
-for i, month in enumerate(Prototype['Month']):
-    fig.add_shape(
-        type="line",
-        x0=month,
-        x1=month,
-        y0=0,
-        y1=1,
-        xref="x",
-        yref="paper",
-        line=dict(color="black", width=1),
-        opacity=0.5,
-        hovertemplate='<b>%{x}</b><extra></extra>',
-        showlegend=False,
-        name='',
-        layer='below',
-    )
-
 # Configure layout
 fig.update_layout(
     barmode='stack',
