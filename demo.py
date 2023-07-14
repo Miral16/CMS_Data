@@ -116,55 +116,58 @@ with col2:
 #     st.plotly_chart(fig2)
 
 
+import bokeh
+from bokeh.plotting import figure, show
+from bokeh.models import HoverTool
+
+# Sample data
+Prototype = pd.DataFrame({
+    'Month': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    'COVID 19 Hospitalization Rate in Exposed Population (%)': [10, 20, 15, 12, 18],
+    'COVID 19 Hospitalization Rate in Unexposed Population (%)': [30, 25, 22, 35, 28],
+    'BA.2 Variant Proportion': [5, 8, 6, 9, 7]
+})
 
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
 
-# Create stacked bar charts
-fig = go.Figure()
-fig.add_trace(go.Bar(
-    x=Prototype['Month'],
-    y=Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'],
-    name='COVID Hospitalization Rate',
-    marker_color='orange',
-    hovertemplate='COVID 19 Hospitalization Rate in Exposed Population: %{y:.2%}<extra></extra>',
-))
-fig.add_trace(go.Bar(
-    x=Prototype['Month'],
-    y=Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'],
-    name='All Hospitalization Rate',
-    marker_color='blue',
-    hovertemplate='COVID 19 Hospitalization Rate in Unexposed Population: %{y:.2%}<extra></extra>',
-))
+# Create figure
+p = figure(
+    x_range=Prototype['Month'],
+    title='COVID and All Hospitalization Rates',
+    plot_width=600,
+    plot_height=400,
+    tooltips=[
+        ('COVID 19 Hospitalization Rate in Exposed Population (%)', '@{COVID 19 Hospitalization Rate in Exposed Population (%)}{0.2%}'),
+        ('COVID 19 Hospitalization Rate in Unexposed Population (%)', '@{COVID 19 Hospitalization Rate in Unexposed Population (%)}{0.2%}'),
+        ('BA.2 Variant Proportion', '@{BA.2 Variant Proportion}'),
+    ]
+)
 
-# Create line chart
-fig.add_trace(go.Scatter(
+# Stacked bar chart
+p.vbar_stack(
+    stackers=['COVID 19 Hospitalization Rate in Exposed Population (%)', 'COVID 19 Hospitalization Rate in Unexposed Population (%)'],
+    x='Month',
+    width=0.9,
+    color=['orange', 'blue'],
+    source=Prototype,
+    legend_label=['COVID Hospitalization Rate', 'All Hospitalization Rate'],
+)
+
+# Line chart
+p.line(
     x=Prototype['Month'],
     y=Prototype['BA.2 Variant Proportion'],
-    name='BA.2 Variant Proportion',
-    mode='lines+markers',
-    line=dict(color='red'),
-    hovertemplate='BA.2 Variant Proportion: %{y}<extra></extra>',
-    yaxis='y2',
-))
-
-# Add vertical lines on hover
-fig.update_layout(
-    hovermode='closest',
-    hoverdistance=0,  # Ensure the hover is activated directly on the bars or lines
-    spikedistance=0,
+    color='red',
+    legend_label='BA.2 Variant Proportion',
 )
 
 # Configure layout
-fig.update_layout(
-    barmode='stack',
-    title='COVID and All Hospitalization Rates',
-    xaxis=dict(title='Month'),
-    yaxis=dict(title='Hospitalization Rate (%)', tickformat='%'),
-    yaxis2=dict(title='Variant Proportion', overlaying='y', side='right'),
-)
+p.xaxis.axis_label = 'Month'
+p.yaxis[0].axis_label = 'Hospitalization Rate (%)'
+p.yaxis[1].axis_label = 'Variant Proportion'
 
 # Display the chart using Streamlit
-st.plotly_chart(fig, use_container_width=True)
+st.bokeh_chart(p, use_container_width=True)
 
