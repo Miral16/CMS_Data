@@ -128,14 +128,14 @@ fig.add_trace(go.Bar(
     y=Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'],
     name='COVID Hospitalization Rate',
     marker_color='orange',
-    hovertemplate='%{y:.0%}',
+    hovertemplate='COVID 19 Hospitalization Rate in Exposed Population: %{y:.2%}<extra></extra>',
 ))
 fig.add_trace(go.Bar(
     x=Prototype['Month'],
     y=Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'],
     name='All Hospitalization Rate',
     marker_color='blue',
-    hovertemplate='%{y:.0%}',
+    hovertemplate='COVID 19 Hospitalization Rate in Unexposed Population: %{y:.2%}<extra></extra>',
 ))
 
 # Create line chart
@@ -145,7 +145,7 @@ fig.add_trace(go.Scatter(
     name='BA.2 Variant Proportion',
     mode='lines+markers',
     line=dict(color='red'),
-    hovertemplate='%{y}',
+    hovertemplate='BA.2 Variant Proportion: %{y}<extra></extra>',
     yaxis='y2',
 ))
 
@@ -166,29 +166,9 @@ for i, month in enumerate(Prototype['Month']):
         xref="x",
         yref="paper",
         line=dict(color="black", width=1),
-        opacity=0,
-        hovertemplate='<b>%{x}</b>',
+        opacity=0.5,
+        hovertemplate='<b>%{x}</b><extra></extra>',
         showlegend=False,
-        name='',
-        layer='below',
-    )
-
-    fig.add_annotation(
-        x=month,
-        y=1,
-        xref="x",
-        yref="paper",
-        text=f"{Prototype['Month'][i]}",
-        showarrow=False,
-        font=dict(size=12),
-        opacity=0,
-        align='center',
-        valign='middle',
-        hovertext=(
-            f"COVID 19 Hospitalization Rate in Exposed Population: {Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'][i]:.2%}<br>"
-            f"COVID 19 Hospitalization Rate in Unexposed Population: {Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'][i]:.2%}<br>"
-            f"BA.2 Variant Proportion: {Prototype['BA.2 Variant Proportion'][i]}"
-        ),
         name='',
         layer='below',
     )
