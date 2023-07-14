@@ -121,13 +121,6 @@ import bokeh
 from bokeh.plotting import figure, show
 from bokeh.models import HoverTool
 
-# Sample data
-Prototype = pd.DataFrame({
-    'Month': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    'COVID 19 Hospitalization Rate in Exposed Population (%)': [10, 20, 15, 12, 18],
-    'COVID 19 Hospitalization Rate in Unexposed Population (%)': [30, 25, 22, 35, 28],
-    'BA.2 Variant Proportion': [5, 8, 6, 9, 7]
-})
 
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
