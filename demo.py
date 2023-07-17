@@ -191,5 +191,5 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
 # Stack the bar charts
 layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
 
-# # Show the stacked bar chart
-# st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
+# Show the stacked bar chart
+st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
