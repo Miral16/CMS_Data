@@ -174,15 +174,24 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 
-# Create bar chart for Exposed and Unexposed hospitalization rates
-Hospitalization_Rates = alt.Chart(Prototype1).mark_bar().encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='Month-Year')),
+# Create bar chart for Exposed hospitalization rates
+Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    y2='COVID 19 Hospitalization Rate in Unexposed Population (%):Q',
-    color=alt.Color('legend:N', scale=alt.Scale(domain=['COVID 19 Hospitalization Rate in Exposed Population (%)', 'COVID 19 Hospitalization Rate in Unexposed Population (%)'], range=['orange', 'blue'])),
-    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q', title='Exposed'),
-             alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', title='Unexposed')],
-).properties(width=650, height=400)
+    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
+)
 
-# Show the chart in Streamlit app
-st.altair_chart(Hospitalization_Rates.interactive())
+# Create bar chart for Unexposed hospitalization rates
+Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
+)
+
+# Stack the bar charts
+layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
+
+# Show the stacked bar chart
+st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
+
+
