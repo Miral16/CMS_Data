@@ -188,4 +188,4 @@ bar_tamponi = base_raffronto.mark_bar(opacity=.4,color='orange').encode(
 #     y=alt.Y('perc_positivi:Q',axis=alt.Axis(title='Percentage of new positives on tests (red line)'),scale=alt.Scale(domain=(0,100)))
 # )
 # layer_bars = alt.layer(bar_tamponi,bar_nuovi_pos)
-st.altair_chart(alt.layer(bar_tamponi).resolve_scale(y='independent').properties(width=650,height=400).interactive())
+st.altair_chart(alt.layer(bar_tamponi).properties(width=650,height=400).interactive())
