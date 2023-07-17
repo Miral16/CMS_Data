@@ -178,7 +178,7 @@ base_raffronto = alt.Chart(Prototype1).encode(
 )
 bar_tamponi = base_raffronto.mark_bar(opacity=.4,color='orange').encode(
     alt.Tooltip(['COVID 19 Hospitalization Rate in Exposed Population (%):Q']),
-    y=alt.Y('Scostamento tamponi:Q',axis=alt.Axis(title='tests (orange bars)')) )
+    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Exposed Population (%)')) )
 # bar_nuovi_pos = base_raffronto.mark_bar(opacity=.4,color='blue').encode(
 #     alt.Tooltip(['data:T', 'nuovi_positivi:Q']),
 #     y=alt.Y('nuovi_positivi:Q',axis=alt.Axis(title='New positives (blue bars)'))
