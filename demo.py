@@ -173,18 +173,21 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-base_raffronto = alt.Chart(Prototype1).encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='month-year'))
+Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
 
-# Create bar charts for hospitalization rates
-Exposed = base_raffronto.mark_bar(opacity=.4,color='orange').encode(
-    alt.Tooltip(['COVID 19 Hospitalization Rate in Exposed Population (%):Q']),
-    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Exposed Population (%)')) )
+# Create bar chart for Unexposed hospitalization rates
+Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
+)
 
-Unexposed = base_raffronto.mark_bar(opacity=.4,color='blue').encode(
-    alt.Tooltip(['COVID 19 Hospitalization Rate in Unexposed Population (%):Q']),
-    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Unexposed Population (%)')) )
+# Stack the bar charts
+layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
 
-layer_bars = alt.layer(Exposed,Unexposed)
-st.altair_chart(layer_bars .properties(width=650,height=400).interactive())
+# Show the stacked bar chart
+st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
