@@ -189,5 +189,5 @@ Exposed = Prototype.mark_bar(opacity=.4,color='orange').encode(
 #     tooltip = ['B.1.1.529'],
 #     y=alt.Y('B.1.1.529:Q',axis=alt.Axis(title='B.1.1.529 variant (red line)'),scale=alt.Scale(domain=(0,100)))
 # )
-# layer_bars = alt.layer(Exposed,Unexposed)
-st.altair_chart(alt.layer(Exposed).properties(width=650,height=400).interactive())
+layer_bars = alt.layer(Exposed,Unexposed)
+st.altair_chart(alt.layer(layer_bars).properties(width=650,height=400).interactive())
