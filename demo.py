@@ -181,14 +181,14 @@ custom_order = ['Jan-22','Feb-22','Mar-22','Apr-22','May-22','Jun-22','Jul-22','
 Prototype1['Month'] = pd.Categorical(Prototype1['Month'], categories=custom_order, ordered=True)
 
 # Create bar chart for Exposed hospitalization rates
-Exposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='orange').encode(
+Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='Exposed Population (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
 
 # Create bar chart for Unexposed hospitalization rates
-Unexposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='blue').encode(
+Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='Unexposed Population (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
