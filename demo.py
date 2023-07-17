@@ -190,4 +190,4 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
 )
 
 layer_bars = alt.layer(Exposed, Unexposed)
-st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
+st.altair_chart(Exposed.properties(width=650, height=400).interactive())
