@@ -192,4 +192,4 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
 layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
 
 # Show the stacked bar chart
-alt.Chart(layer_bars).properties(width=650, height=400).interactive()
+st.alt.Chart(layer_bars).properties(width=650, height=400).interactive()
