@@ -174,22 +174,22 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 
-# Create bar chart for Exposed hospitalization rates
-Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
-    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
-)
+# # Create bar chart for Exposed hospitalization rates
+# Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
+#     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+#     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+#     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
+# )
 
-# Create bar chart for Unexposed hospitalization rates
-Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
-    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
-)
+# # Create bar chart for Unexposed hospitalization rates
+# Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
+#     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+#     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+#     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
+# )
 
-# Stack the bar charts
-layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
+# # Stack the bar charts
+# layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
 
-# Show the stacked bar chart
-st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
+# # Show the stacked bar chart
+# st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
