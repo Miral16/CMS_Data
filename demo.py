@@ -186,4 +186,4 @@ Unexposed = Prototype.mark_bar(opacity=.4,color='blue').encode(
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Unexposed Population (%)')) )
 
 layer_bars = alt.layer(Exposed,Unexposed)
-st.altair_chart(alt.layer(layer_bars).properties(width=650,height=400).interactive())
+st.altair_chart(alt.layer(Unexposed).properties(width=650,height=400).interactive())
