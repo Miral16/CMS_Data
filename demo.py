@@ -175,15 +175,15 @@ st.plotly_chart(fig, use_container_width=True)
 
 Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
     x=alt.X('Month(data):O', axis=alt.Axis(title='month-year',sort='ascending')),
-    y=alt.Y('data:T','COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    tooltip=[alt.Tooltip('Exposed Population (%):Q')]
+    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    tooltip=[alt.Tooltip('data:T','Exposed Population (%):Q')]
 )
 
 # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year',sort='ascending')),
-    y=alt.Y('data:T','COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    tooltip=[alt.Tooltip('Unexposed Population (%):Q')]
+    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    tooltip=[alt.Tooltip('data:T','Unexposed Population (%):Q')]
 )
 
 # Stack the bar charts
