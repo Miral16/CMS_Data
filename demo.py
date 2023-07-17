@@ -173,33 +173,20 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-# Create a stacked bar chart for hospitalization rates
-bar_chart = alt.Chart(Prototype1).transform_fold(
-    ['COVID 19 Hospitalization Rate in Exposed Population (%)',
-     'COVID 19 Hospitalization Rate in Unexposed Population (%)']
-).mark_bar().encode(
-    x='Month:T',
-    y='value:Q',
-    color='key:N',
-    tooltip=['Month:T', 'key:N', 'value:Q']
-).properties(
-    width=800,
-    height=400
+base_raffronto = alt.Chart(Prototype1).encode(
+    x=alt.X('Month:O', axis=alt.Axis(title='month-day'))
 )
-
-# Create line charts for the variants
-line_chart = alt.Chart(Prototype1).transform_fold(
-    ['B.1.1.529', 'BA.1.1']
-).mark_line().encode(
-    x='Month:T',
-    y='value:Q',
-    color='key:N',
-    tooltip=['Month:T', 'key:N', 'value:Q']
-).properties(
-    width=800,
-    height=400
-)
-
-# Show both charts
-st.altair_chart(bar_chart)
-
+bar_tamponi = base_raffronto.mark_bar(opacity=.4,color='orange').encode(
+    alt.Tooltip(['COVID 19 Hospitalization Rate in Exposed Population (%):Q']),
+    y=alt.Y('Scostamento tamponi:Q',axis=alt.Axis(title='tests (orange bars)'))
+# )
+# bar_nuovi_pos = base_raffronto.mark_bar(opacity=.4,color='blue').encode(
+#     alt.Tooltip(['data:T', 'nuovi_positivi:Q']),
+#     y=alt.Y('nuovi_positivi:Q',axis=alt.Axis(title='New positives (blue bars)'))
+# )
+# line_perc = base_raffronto.mark_line(opacity=.7,color='red',point=True).encode(
+#     tooltip = [{'type':'temporal','field':'data'},{'type':'quantitative','field':'perc_positivi','format':'.2f'}],
+#     y=alt.Y('perc_positivi:Q',axis=alt.Axis(title='Percentage of new positives on tests (red line)'),scale=alt.Scale(domain=(0,100)))
+# )
+# layer_bars = alt.layer(bar_tamponi,bar_nuovi_pos)
+st.altair_chart(alt.layer(bar_tamponi).resolve_scale(y='independent').properties(width=650,height=400).interactive())
