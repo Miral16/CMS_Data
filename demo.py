@@ -173,21 +173,33 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-chart = alt.Chart(Prototype1).mark_line().encode(
+# Create a stacked bar chart for hospitalization rates
+bar_chart = alt.Chart(Prototype1).transform_fold(
+    ['COVID 19 Hospitalization Rate in Exposed Population (%)',
+     'COVID 19 Hospitalization Rate in Unexposed Population (%)']
+).mark_bar().encode(
     x='Month:T',
-    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='Hospitalization Rate (%)')),
-    y2='COVID 19 Hospitalization Rate in Unexposed Population (%):Q',
-    color=alt.Color('Month:T', scale=alt.Scale(scheme='category20')),
-    tooltip=['Month:T',
-             alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q', title='Exposed Pop. Rate (%)'),
-             alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', title='Unexposed Pop. Rate (%)'),
-             alt.Tooltip('B.1.1.529:Q', title='B.1.1.529 Proportion'),
-             alt.Tooltip('BA.1.1:Q', title='BA.1.1 Proportion')],
+    y='value:Q',
+    color='key:N',
+    tooltip=['Month:T', 'key:N', 'value:Q']
 ).properties(
     width=800,
     height=400
 )
 
-# Show the chart
-st.altair_chart(chart)
+# Create line charts for the variants
+line_chart = alt.Chart(Prototype1).transform_fold(
+    ['B.1.1.529', 'BA.1.1']
+).mark_line().encode(
+    x='Month:T',
+    y='value:Q',
+    color='key:N',
+    tooltip=['Month:T', 'key:N', 'value:Q']
+).properties(
+    width=800,
+    height=400
+)
+
+# Show both charts
+st.altair_chart(bar_chart | line_chart, use_container_width=True)
 
