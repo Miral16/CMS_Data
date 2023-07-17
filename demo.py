@@ -173,19 +173,21 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-base_raffronto = alt.Chart(Prototype1).encode(
+Prototype = alt.Chart(Prototype1).encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-day'))
 )
-bar_tamponi = base_raffronto.mark_bar(opacity=.4,color='orange').encode(
+
+Exposed = Prototype.mark_bar(opacity=.4,color='orange').encode(
     alt.Tooltip(['COVID 19 Hospitalization Rate in Exposed Population (%):Q']),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Exposed Population (%)')) )
-# bar_nuovi_pos = base_raffronto.mark_bar(opacity=.4,color='blue').encode(
-#     alt.Tooltip(['data:T', 'nuovi_positivi:Q']),
-#     y=alt.Y('nuovi_positivi:Q',axis=alt.Axis(title='New positives (blue bars)'))
-# )
-# line_perc = base_raffronto.mark_line(opacity=.7,color='red',point=True).encode(
-#     tooltip = [{'type':'temporal','field':'data'},{'type':'quantitative','field':'perc_positivi','format':'.2f'}],
-#     y=alt.Y('perc_positivi:Q',axis=alt.Axis(title='Percentage of new positives on tests (red line)'),scale=alt.Scale(domain=(0,100)))
-# )
-# layer_bars = alt.layer(bar_tamponi,bar_nuovi_pos)
-st.altair_chart(alt.layer(bar_tamponi).properties(width=650,height=400).interactive())
+
+Unexposed = Prototype.mark_bar(opacity=.4,color='blue').encode(
+    alt.Tooltip(['COVID 19 Hospitalization Rate in Unexposed Population (%):Q']),
+    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%)',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Unexposed Population (%)')))
+
+variant = Prototype.mark_line(opacity=.7,color='red',point=True).encode(
+    tooltip = ['B.1.1.529'],
+    y=alt.Y('B.1.1.529:Q',axis=alt.Axis(title='B.1.1.529 variant (red line)'),scale=alt.Scale(domain=(0,100)))
+)
+layer_bars = alt.layer(Exposed,Unexposed)
+st.altair_chart(alt.layer(layer_bars,variant).properties(width=650,height=400).interactive())
