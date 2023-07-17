@@ -190,4 +190,4 @@ variant = Prototype.mark_line(opacity=.7,color='red',point=True).encode(
     y=alt.Y('B.1.1.529:Q',axis=alt.Axis(title='B.1.1.529 variant (red line)'),scale=alt.Scale(domain=(0,100)))
 )
 layer_bars = alt.layer(Exposed,Unexposed)
-st.altair_chart(alt.layer(layer_bars,variant).properties(width=650,height=400).interactive())
+st.altair_chart(alt.layer(layer_bars).properties(width=650,height=400).interactive())
