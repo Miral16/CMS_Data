@@ -173,7 +173,7 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-Prototype1_sorted = Prototype1.sort_values('Month-Year')
+Prototype1_sorted = Prototype1.sort_values('Month')
 
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='orange').encode(
