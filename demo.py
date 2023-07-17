@@ -173,7 +173,13 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
+
+# Convert "Month-Year" column to a proper date format
+Prototype1['Month'] = pd.to_datetime(Prototype1['Month'], format='%b-%y')
+
+# Sort the data by the "Date" column
 Prototype1_sorted = Prototype1.sort_values('Month')
+
 
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='orange').encode(
