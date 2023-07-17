@@ -174,26 +174,15 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 
-# Define the custom order for months
-custom_order = ['Jan-22','Feb-22','Mar-22','Apr-22','May-22','Jun-22','Jul-22','Aug-22','Sep-22','Oct-22','Nov-22','Dec-22','Jan-23','Feb-23','Mar-23','Apr-23','May-23','Jun-23']
-
-
-# Convert "Month-Year" column to a proper date format and then to a categorical data with custom order
-Prototype1['Date'] = pd.to_datetime(Prototype1['Month'], format='%b-%y')
-Prototype1['Month'] = pd.Categorical(Prototype1['Month'], categories=custom_order, ordered=True)
-
-# Sort the data by the custom order of the "Month-Year" column
-Prototype1_sorted = Prototype1.sort_values('Month-Year')
-
 # Create bar chart for Exposed hospitalization rates
-Exposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='orange').encode(
+Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='orange').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='Exposed Population (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
 
 # Create bar chart for Unexposed hospitalization rates
-Unexposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='blue').encode(
+Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='Unexposed Population (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
