@@ -179,13 +179,10 @@ Hospitalization_Rates = alt.Chart(Prototype1).mark_bar().encode(
     x=alt.X('Month:O', axis=alt.Axis(title='Month-Year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     y2='COVID 19 Hospitalization Rate in Unexposed Population (%):Q',
-    color=alt.Color('legend:N', scale=alt.Scale(domain=['Exposed', 'Unexposed'], range=['orange', 'blue'])),
+    color=alt.Color('legend:N', scale=alt.Scale(domain=['COVID 19 Hospitalization Rate in Exposed Population (%)', 'COVID 19 Hospitalization Rate in Unexposed Population (%)'], range=['orange', 'blue'])),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q', title='Exposed'),
              alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', title='Unexposed')],
 ).properties(width=650, height=400)
 
 # Show the chart in Streamlit app
 st.altair_chart(Hospitalization_Rates.interactive())
-
-# Show the stacked bar chart
-st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
