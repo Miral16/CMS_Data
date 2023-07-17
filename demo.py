@@ -181,13 +181,13 @@ Exposed = Prototype.mark_bar(opacity=.4,color='orange').encode(
     alt.Tooltip(['COVID 19 Hospitalization Rate in Exposed Population (%):Q']),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Exposed Population (%)')) )
 
-Unexposed = Prototype.mark_bar(opacity=.4,color='blue').encode(
-    alt.Tooltip(['COVID 19 Hospitalization Rate in Unexposed Population (%):Q']),
-    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%)',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Unexposed Population (%)')))
+# Unexposed = Prototype.mark_bar(opacity=.4,color='blue').encode(
+#     alt.Tooltip(['COVID 19 Hospitalization Rate in Unexposed Population (%):Q']),
+#     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%)',axis=alt.Axis(title='COVID 19 Hospitalization Rate in Unexposed Population (%)')))
 
-variant = Prototype.mark_line(opacity=.7,color='red',point=True).encode(
-    tooltip = ['B.1.1.529'],
-    y=alt.Y('B.1.1.529:Q',axis=alt.Axis(title='B.1.1.529 variant (red line)'),scale=alt.Scale(domain=(0,100)))
-)
-layer_bars = alt.layer(Exposed,Unexposed)
-st.altair_chart(alt.layer(layer_bars).properties(width=650,height=400).interactive())
+# variant = Prototype.mark_line(opacity=.7,color='red',point=True).encode(
+#     tooltip = ['B.1.1.529'],
+#     y=alt.Y('B.1.1.529:Q',axis=alt.Axis(title='B.1.1.529 variant (red line)'),scale=alt.Scale(domain=(0,100)))
+# )
+# layer_bars = alt.layer(Exposed,Unexposed)
+st.altair_chart(alt.layer(Exposed).properties(width=650,height=400).interactive())
