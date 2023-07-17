@@ -201,5 +201,5 @@ line_chart = alt.Chart(Prototype1).transform_fold(
 )
 
 # Show both charts
-st.altair_chart(bar_chart | line_chart, use_container_width=True)
+st.altair_chart(bar_chart & line_chart)
 
