@@ -174,12 +174,14 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 
-# Convert "Month-Year" column to a proper date format
-Prototype1['Month'] = pd.to_datetime(Prototype1['Month'], format='%b-%y')
+# Define the custom order for months
+custom_order = ['Jan-22', 'Feb-22', 'Mar-22', 'Apr-22', 'May-22', 'Jun-22', 'Jul-22', 'Aug-22', 'Sep-22', 'Oct-22', 'Nov-22', 'Dec-22']
 
-# Sort the data by the "Date" column
+# Convert "Month-Year" column to a proper date format and then to a categorical data with custom order
+Prototype1['Month'] = pd.Categorical(Prototype1['Month'], categories=custom_order, ordered=True)
+
+# Sort the data by the custom order of the "Month-Year" column
 Prototype1_sorted = Prototype1.sort_values('Month')
-
 
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1_sorted).mark_bar(opacity=0.4, color='orange').encode(
