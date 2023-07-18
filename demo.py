@@ -187,9 +187,15 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
+
+variant = Prototype1.mark_line(opacity=.7,color='red',point=True).encode(
+    y=alt.Y('B.1.1.529:Q',axis=alt.Axis(title='Percentage of new positives on tests (red line)'),scale=alt.Scale(domain=(0,100)))
+)
+
+
 # Stack the bar charts
 layer_bars = alt.layer(Exposed, Unexposed)
 # Show the stacked bar chart
-st.altair_chart(layer_bars.properties(width=650, height=400).interactive())
+st.altair_chart(variant.properties(width=650, height=400).interactive())
 
 
