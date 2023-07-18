@@ -158,7 +158,7 @@ month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","A
 
 fig_exposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Exposed Population (%)', opacity=0.4, color_discrete_sequence=['blue'], labels={'COVID 19 Hospitalization Rate in Exposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Exposed Hospitalization Rates')
 fig_unexposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Unexposed Population (%)', opacity=0.4, color_discrete_sequence=['green'], labels={'COVID 19 Hospitalization Rate in Unexposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Unexposed Hospitalization Rates')
-fig_variant = px.line(Prototype1, x='Month', y='Variant', line_shape='linear', line_dash='solid', color_discrete_sequence=['red'], labels={'Variant': 'B.1.1.529 Variant'}, title='B.1.1.529 Variant')
+fig_variant = px.line(Prototype1, x='Month', y='Variant', line_shape='linear', color_discrete_sequence=['red'], labels={'Variant': 'B.1.1.529 Variant'}, title='B.1.1.529 Variant')
 fig_combined = fig_exposed.add_traces(fig_unexposed.data).add_traces(fig_variant.data)
 st.plotly_chart(fig_combined)
 
