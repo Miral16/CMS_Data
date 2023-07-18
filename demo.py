@@ -249,10 +249,8 @@ fig_variant.add_trace(fig_variant4)
 fig_variant.add_trace(fig_variant5)
 fig_variant.add_trace(fig_variant6)
 fig_variant.add_trace(fig_variant7)
-# Update x and y axis titles for the variant chart
-fig_variant.update_xaxes(title_text='Month-Year')
-fig_variant.update_yaxes(title_text='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
-# fig_variant.update_layout(yaxis=dict(title='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+
+fig_variant.update_layout(yaxis=dict(title='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Combine both figures into a single subplot
 fig_combined = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1)
