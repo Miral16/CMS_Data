@@ -164,6 +164,11 @@ Prototype1 = Prototype1.drop(index=Prototype1.index[18:], inplace=False)
 # Create line chart for B.1.1.529 variant
 fig_variant1 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant1'], line=dict(color='red'), name='B.1.1.529 Variant')
 fig_variant2 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant2'], line=dict(color='blue'), name='BA.1.1 Variant')
+fig_variant3 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant3'], line=dict(color='green'), name='BA.2 Variant')
+fig_variant4 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant4'], line=dict(color='grey'), name='BA.2.12.1 Variant')
+fig_variant5 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant5'], line=dict(color='black'), name='BA.5 Variant')
+fig_variant6 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant6'], line=dict(color='pink'), name='BQ.1.1 Variant')
+fig_variant7 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant7'], line=dict(color='orange'), name='XBB.1.5 Variant')
 
 # Create subplot for hospitalization rates
 fig_hospitalization = go.Figure()
@@ -186,6 +191,11 @@ fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
 # Add line trace for the variant proportion
 fig_combined.add_trace(fig_variant1)
 fig_combined.add_trace(fig_variant2)
+fig_combined.add_trace(fig_variant3)
+fig_combined.add_trace(fig_variant4)
+fig_combined.add_trace(fig_variant5)
+fig_combined.add_trace(fig_variant6)
+fig_combined.add_trace(fig_variant7)
 
 # Configure the right y-axis for the variant proportion
 y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
