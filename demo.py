@@ -264,12 +264,12 @@ for trace in fig_hospitalization.data:
     fig_combined.add_trace(trace, row=2, col=1)
 
 # Configure the layout
-fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600,
+fig_combined.update_layout(title='COVID 19 Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600,
                            legend=dict(orientation='h', yanchor='bottom', y=-0.4, xanchor='center', x=0.5),
                            margin=dict(l=50, r=50, t=100, b=80))
 
 # Add titles to the rows
-fig_combined.update_yaxes(title_text="COVID Hospitalization Rate (%)", row=2, col=1)
+fig_combined.update_yaxes(title_text="COVID 19 Hospitalization Rate (%)", row=2, col=1)
 fig_combined.update_yaxes(title_text="Variant Proportion", row=1, col=1)
 
 # Render the Plotly figure using Streamlit
