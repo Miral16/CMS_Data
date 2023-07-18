@@ -213,4 +213,4 @@ fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Varia
                            margin=dict(l=50, r=50, t=100, b=80))
 
 # Render the Plotly figure using Streamlit
-st.plotly_chart(fig_hospitalization)
+st.plotly_chart(fig_combined)
