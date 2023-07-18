@@ -154,7 +154,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 
-Create bar chart for Exposed hospitalization rates
+# Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
