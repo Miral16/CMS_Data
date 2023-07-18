@@ -198,6 +198,6 @@ variant = alt.Chart(Prototype1).mark_line(color='red').encode(
 # Stack the bar charts
 layer_bars = alt.layer(Exposed, Unexposed)
 # Show the stacked bar chart
-st.altair_chart(variant.properties(width=650, height=400).interactive())
+st.altair_chart(variant, use_container_width=True)
 
 
