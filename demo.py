@@ -183,39 +183,6 @@ st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').pro
 
 
 
-# Create bar chart for Exposed hospitalization rates
-Exposed1 = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
-    x=alt.X('Month:O', sort=month_order, axis=alt.Axis(title='month-year')),
-    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q',
-            axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    y2='baseline',  # This sets the bottom of the bars to a baseline value
-    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
-)
-st.altair_chart(Exposed1.properties(width=1000, height=500).interactive())
-# # Create bar chart for Unexposed hospitalization rates
-# Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
-#     x=alt.X('Month:O', sort=month_order, axis=alt.Axis(title='month-year')),
-#     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q',
-#             axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-#     y2='baseline',  # This sets the bottom of the bars to a baseline value
-#     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
-# )
-
-# # Create line chart for B.1.1.529 variant
-# variant = alt.Chart(Prototype1).mark_line(color='red').encode(
-#     x=alt.X('Month:O', sort=month_order, axis=alt.Axis(title='month-year')),
-#     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
-#     tooltip=[alt.Tooltip('Variant:Q')]
-# )
-
-# # Calculate a baseline value for bars (0 in this case) to separate them visually
-# baseline = pd.DataFrame({'baseline': [0]})
-
-# # Layer the charts with separate bars and independent y-scales
-# layer_bars = alt.layer(Exposed, Unexposed, data=baseline, height=400)
-
-# # Plot the combined chart
-# st.altair_chart(alt.layer(layer_bars, variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
 
 
 
