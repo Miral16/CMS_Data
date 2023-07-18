@@ -216,6 +216,8 @@ fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Varia
 st.plotly_chart(fig_combined)
 
 
+
+##### 
 # Your data and setup (replace this with your data)
 month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
 
@@ -230,6 +232,10 @@ fig_variant4 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant4'], line=
 fig_variant5 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant5'], line=dict(color='black'), name='BA.5 Variant')
 fig_variant6 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant6'], line=dict(color='pink'), name='BQ.1.1 Variant')
 fig_variant7 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant7'], line=dict(color='orange'), name='XBB.1.5 Variant')
+
+# Update x and y axis titles for the variant chart
+fig_variant.update_xaxes(title_text='Month-Year')
+fig_variant.update_yaxes(title_text='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Create line chart for hospitalization rates
 fig_hospitalization = make_subplots(specs=[[{"secondary_y": True}]])
