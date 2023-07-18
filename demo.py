@@ -172,7 +172,7 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
 
-st.altair_chart(Unexposed.properties(width=1000, height=500).interactive())
+st.alt_chart(Unexposed.properties(width=1000, height=500).interactive())
 
 # Create line chart for B.1.1.529 variant
 variant = alt.Chart(Prototype1).mark_line(color='red').encode(
@@ -181,7 +181,7 @@ variant = alt.Chart(Prototype1).mark_line(color='red').encode(
     tooltip=[alt.Tooltip('Variant:Q')]
 )
 
-st.altair_chart(variant.properties(width=1000, height=500).interactive())
+st.alt_chart(variant.properties(width=1000, height=500).interactive())
 
 # layer_bars = alt.layer(Exposed, Unexposed)
 # st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
