@@ -186,10 +186,19 @@ st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').pro
 Exposed1 = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', sort=month_order, axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    # y2='baseline',  # This sets the bottom of the bars to a baseline value
+    y2='baseline',  # This sets the bottom of the bars to a baseline value
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
-st.altair_chart(Exposed1.properties(width=1000, height=500).interactive())
+
+Unexposed1 = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
+    x=alt.X('Month:O', sort=month_order, axis=alt.Axis(title='month-year')),
+    y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q',
+            axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    y2='baseline',  # This sets the bottom of the bars to a baseline value
+    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
+)
+
+st.altair_chart(Unexposed1.properties(width=1000, height=500).interactive())
 
 
 
