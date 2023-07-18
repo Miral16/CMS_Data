@@ -1,4 +1,4 @@
-Month,COVID 19 Hospitalization Rate in Exposed Population (%),COVID 19 Hospitalization Rate in Unexposed Population (%),Variant,BA.1.1,BA.2,BA.2.12.1,BA.5,BQ.1.1,XBB.1.5
+Month,COVID 19 Hospitalization Rate in Exposed Population (%),COVID 19 Hospitalization Rate in Unexposed Population (%),Variant1,Variant2,Variant3,Variant4,Variant5,Variant6,Variant7
 Jan-22,0.0049,0.0082,47.9603604,33.09650496,0.16805998,0.003876844,0.000956925,0,0
 Feb-22,0.0074,0.0115,37.58112571,33.24872655,1.667587095,0.011817552,0.002621803,0,7.76433E-05
 Mar-22,0.0131,0.0164,24.65670683,24.01485661,15.06515546,0.613906453,0.006898199,0,0
