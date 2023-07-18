@@ -216,6 +216,18 @@ fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Varia
 st.plotly_chart(fig_combined)
 
 
+
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import streamlit as st
+
+# Your data and setup (replace this with your data)
+month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
+
+Prototype1["Month"] = pd.Categorical(Prototype1["Month"], categories=month_order, ordered=True)
+Prototype1 = Prototype1.drop(index=Prototype1.index[18:], inplace=False)
+
 # Create line chart for B.1.1.529 variant
 fig_variant1 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant1'], line=dict(color='red'), name='B.1.1.529 Variant')
 fig_variant2 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant2'], line=dict(color='blue'), name='BA.1.1 Variant')
@@ -247,14 +259,14 @@ fig_combined.add_trace(fig_unexposed)
 
 # Configure the left y-axis for hospitalization rates
 y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
-fig_combined.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+fig_combined.update_yaxes(range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Configure the right y-axis for the variant proportion
 y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
 fig_combined.update_layout(yaxis2=dict(title='Variant Proportion', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Update the left y-axis title
-fig_combined.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True, secondary_y=False)
+fig_combined.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickformat=".2%", secondary_y=False)
 
 # Configure the layout
 fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600,
@@ -263,3 +275,4 @@ fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Varia
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
+
