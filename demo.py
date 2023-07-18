@@ -201,6 +201,7 @@ fig_combined.add_trace(fig_variant7)
 # Configure the right y-axis for the variant proportion
 y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
 fig_combined.update_layout(yaxis2=dict(title='Variant Proportion', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+fig_combined.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Merge both subplots
 fig_combined.update_traces(yaxis='y2')  # Align the variant line chart with the right y-axis
