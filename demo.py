@@ -178,7 +178,7 @@ fig_unexposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitaliza
 fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant'], line=dict(color='red'), name='B.1.1.529 Variant', yaxis='y2')
 
 # Combine the charts into a subplot
-fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
+fig_combined = make_subplots(specs=[[{"secondary_y": False}]])
 
 # Add bar traces to the subplot for hospitalization rates
 fig_combined.add_trace(fig_exposed, secondary_y=False)
