@@ -169,18 +169,15 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
 
+# Create line chart for B.1.1.529 variant
+variant = alt.Chart(Prototype1).mark_line(color='red').encode(
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+    y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
+    tooltip=[alt.Tooltip('Variant:Q')]
+)
+st.altair_chart(variant.properties(width=1000, height=500).interactive())
+# Stack the bar charts
 layer_bars = alt.layer(Exposed, Unexposed)
-
-st.altair_chart(layer_bars.properties(width=1000, height=500).interactive())
-
-# # Create line chart for B.1.1.529 variant
-# variant = alt.Chart(Prototype1).mark_line(color='red').encode(
-#     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
-#     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
-#     tooltip=[alt.Tooltip('Variant:Q')]
-# )
-# # Stack the bar charts
-# layer_bars = alt.layer(Exposed, Unexposed)
 
 # # Show the stacked bar chart
 # st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
