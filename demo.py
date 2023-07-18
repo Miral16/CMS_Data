@@ -6,16 +6,13 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
 import altair as alt
-
 ## Improting CSV File
 beneficiary = pd.read_csv("benificiary_d.csv")
 Prototype = pd.read_csv("Prototype.csv")
 Prototype1 = pd.read_csv("Prototype1.csv")
-
 ## Setting Up Title of Dashboad
 st.set_page_config(page_title="Demographic Distribution of CMS Beneficiary Data", layout="wide")
 st.markdown(f"<h1 style='text-align: left; color: #00008B; width:1360px; height : 100px '>Demographic Distribution of CMS Beneficiary Data</h1>",unsafe_allow_html=True)
-
 ## Filtering Options
 with st.sidebar:
     st.markdown(
@@ -23,15 +20,10 @@ with st.sidebar:
         '<h2 style = "text-align: center; color: white"> Filter </h2>'
         '</div>', unsafe_allow_html=True
     )
-
     a=['All']          
     options1=st.multiselect('Select age', options=['All'] + list(beneficiary['AGE_INTERVAL'].unique().tolist()),default=a)
-
     options2=st.multiselect('Select Gender', options=['All'] + list(beneficiary['GENDER'].unique().tolist()),default=a)
-
     options3=st.multiselect('Select Race', options=['All'] + list(beneficiary['RACE'].unique().tolist()),default=a)
-
-
     if 'All' in options1:
              filtered_df = beneficiary
     else:
@@ -42,10 +34,7 @@ with st.sidebar:
            
     if 'All' not in options3:
             filtered_df = filtered_df[filtered_df['RACE'].isin(options3)]
-
 df = filtered_df.drop_duplicates(subset=["DESYNPUF_ID"], keep='first')
-
-
 ## Statistics
     
 style = """
@@ -54,12 +43,10 @@ div[data-testid="metric-value-container"] {
     font-weight: bold;
     color: #ffffff;
 }
-
 div[data-testid="metric-delta-container"] {
     font-size: 2rem;
     font-weight: bold;
 }
-
 div[data-testid="metric-container"] {
     background-color: #B0C4DE; ## color of no. of unqiue patient
     border-radius: 10px;
@@ -68,8 +55,6 @@ div[data-testid="metric-container"] {
 """
 st.write('<style>{}</style>'.format(style), unsafe_allow_html=True)
 st.metric("Number of Unique Patients",f"{len(df['DESYNPUF_ID'].unique())}")
-
-
 ## Individual Graphs
 col1, col2 = st.columns(2)
 with col1:
@@ -80,7 +65,6 @@ with col1:
                    title = "Age-wise Distribution",
                    height=400
                    
-
                    )
     st.plotly_chart(fig)
     
@@ -109,19 +93,13 @@ with col2:
 #              width=600,
 #              title="Age Base Analysis",
 #              height=400)
-
 #     fig2.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
-
 #     fig2.update_layout(xaxis_title='Age Interval', yaxis_title='Percentage'
 # )
 #     st.plotly_chart(fig2)
-
-
-
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
-
 # Create stacked bar charts
 fig = go.Figure()
 fig.add_trace(go.Bar(
@@ -138,7 +116,6 @@ fig.add_trace(go.Bar(
     marker_color='blue',
     hovertemplate='COVID 19 Hospitalization Rate in Unexposed Population: %{y:.2%}<extra></extra>',
 ))
-
 # Create line chart
 fig.add_trace(go.Scatter(
     x=Prototype['Month'],
@@ -149,7 +126,6 @@ fig.add_trace(go.Scatter(
     hovertemplate='BA.2 Variant Proportion: %{y}<extra></extra>',
     yaxis='y2',
 ))
-
 fig.add_trace(go.Scatter(
     x=Prototype['Month'],
     y=Prototype['BA.1 Variant Proportion'],
@@ -159,8 +135,6 @@ fig.add_trace(go.Scatter(
     hovertemplate='BA.1 Variant Proportion: %{y}<extra></extra>',
     yaxis='y2',
 ))
-
-
 # Configure layout
 fig.update_layout(
     barmode='stack',
@@ -169,37 +143,28 @@ fig.update_layout(
     yaxis=dict(title='Hospitalization Rate (%)', tickformat='%'),
     yaxis2=dict(title='Variant Proportion', overlaying='y', side='right'),
 )
-
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
-
-
-
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
-
 # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
-
 # Create line chart for B.1.1.529 variant
 variant = alt.Chart(Prototype1).mark_line(color='red').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
     tooltip=[alt.Tooltip('Variant:Q')]
 )
-
 # Stack the bar charts
-layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
+layer_bars = alt.layer(Exposed, Unexposed)
 
-# Show the stacked bar chart and the line chart
-st.altair_chart(alt.layer(layer_bars, variant).properties(width=650, height=400).interactive())
-
-
+# Show the stacked bar chart
+st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
