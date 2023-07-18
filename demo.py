@@ -235,18 +235,18 @@ fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rat
 fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
 
 # Add line trace for the variant proportion (B.1.1.529)
-fig_combined.add_trace(fig_variant1)
-fig_combined.add_trace(fig_variant2)
-fig_combined.add_trace(fig_variant3)
-fig_combined.add_trace(fig_variant4)
-fig_combined.add_trace(fig_variant5)
-fig_combined.add_trace(fig_variant6)
-fig_combined.add_trace(fig_variant7)
+# fig_combined.add_trace(fig_variant1)
+# fig_combined.add_trace(fig_variant2)
+# fig_combined.add_trace(fig_variant3)
+# fig_combined.add_trace(fig_variant4)
+# fig_combined.add_trace(fig_variant5)
+# fig_combined.add_trace(fig_variant6)
+# fig_combined.add_trace(fig_variant7)
 
 
 # Configure the right y-axis for the variant proportion
-y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
-fig_combined.update_layout(yaxis2=dict(title='B.1.1.529 Variant', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+# y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
+# fig_combined.update_layout(yaxis2=dict(title='B.1.1.529 Variant', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Merge both subplots
 fig_combined.update_traces(yaxis='y2')  # Align the variant line chart with the right y-axis
