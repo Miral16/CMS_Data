@@ -178,14 +178,14 @@ fig_unexposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitaliza
 fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant'], line=dict(color='red'), name='B.1.1.529 Variant', yaxis='y2')
 
 # Combine the charts into a subplot
-fig_combined = make_subplots(specs=[[{"secondary_y": False}]])
+fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
 
 # Add bar traces to the subplot for hospitalization rates
 fig_combined.add_trace(fig_exposed, secondary_y=False)
 fig_combined.add_trace(fig_unexposed, secondary_y=False)
 
 # Add line trace for the variant proportion
-fig_combined.add_trace(fig_variant, secondary_y=True)
+# fig_combined.add_trace(fig_variant, secondary_y=True)
 
 # Configure the left y-axis for hospitalization rates
 y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
@@ -194,8 +194,8 @@ fig_combined.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickfo
 
 # # Configure the right y-axis for the variant proportion
 # fig_combined.update_yaxes(title_text='B.1.1.529 Variant', tickformat="", range=[0, Prototype1['Variant'].max() * 1.2], side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
-y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
-fig_combined.update_yaxes(title_text='B.1.1.529 Variant', tickformat="", range=y2_range, side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
+# y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
+# fig_combined.update_yaxes(title_text='B.1.1.529 Variant', tickformat="", range=y2_range, side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Configure the layout
 fig_combined.update_layout(title='COVID-19 Hospitalization Rates and B.1.1.529 Variant', xaxis_title='Month-Year', width=1000, height=500)
