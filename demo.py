@@ -199,9 +199,9 @@ variant = alt.Chart(Prototype1).mark_line(color='red').encode(
 )
 
 # Stack the bar charts
-layer_bars = alt.layer(Exposed, Unexposed)
+layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
 
-# Show the stacked bar chart
-st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
+# Show the stacked bar chart and the line chart
+st.altair_chart(alt.layer(layer_bars, variant).properties(width=650, height=400).interactive())
 
 
