@@ -184,7 +184,7 @@ fig_hospitalization.add_trace(fig_unexposed)
 
 # Configure the left y-axis for hospitalization rates
 y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
-fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%",side='left' range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Create subplot for variant proportion
 fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
@@ -209,8 +209,8 @@ for trace in fig_hospitalization.data:
 
 # Configure the layout
 fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600,
-                           legend=dict(orientation='h', yanchor='bottom', y=-0.5, xanchor='center', x=0.5),
-                           margin=dict(l=80, r=80, t=100, b=80))
+                           legend=dict(orientation='h', yanchor='bottom', y=-0.4, xanchor='center', x=0.5),
+                           margin=dict(l=50, r=50, t=100, b=80))
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
