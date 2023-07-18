@@ -177,7 +177,7 @@ month_order = ['Jan-22','Feb-22','Mar-22','Apr-22','May-22','Jun-22','Jul-22','A
 
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year',sort=month_order)),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
@@ -191,7 +191,7 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
 
 # Create line chart for B.1.1.529 variant
 variant = alt.Chart(Prototype1).mark_line(color='red').encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year',sort=month_order)),
     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
     tooltip=[alt.Tooltip('Variant:Q')]
 )
