@@ -271,7 +271,6 @@ fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Varia
 # Add titles to the rows
 fig_combined.update_yaxes(title_text="COVID Hospitalization Rate (%)", row=2, col=1)
 fig_combined.update_yaxes(title_text="Variant Proportion", row=1, col=1)
-fig_combined.update_yaxes(title_text="Month-Year")
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
