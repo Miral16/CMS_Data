@@ -215,7 +215,7 @@ baseline = pd.DataFrame({'baseline': [0]})
 layer_bars = alt.layer(Exposed, Unexposed, data=baseline, height=400)
 
 # Plot the combined chart
-alt.layer(layer_bars, variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive()
+st.altair_chart(alt.layer(layer_bars, variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
 
 
 
