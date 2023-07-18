@@ -182,10 +182,10 @@ fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
 
 # Add bar traces to the subplot for hospitalization rates
 fig_combined.add_trace(fig_exposed, secondary_y=False)
-fig_combined.add_trace(fig_unexposed, secondary_y=True)
+fig_combined.add_trace(fig_unexposed, secondary_y=False)
 
 # Add line trace for the variant proportion
-fig_combined.add_trace(fig_variant)
+fig_combined.add_trace(fig_variant, secondary_y=True)
 
 # Configure the left y-axis for hospitalization rates
 y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
