@@ -161,13 +161,13 @@ Prototype1 = Prototype1.drop(index=Prototype1.index[18:], inplace=False)
 
 st.dataframe(Prototype1)
 
-# # Create bar chart for Exposed hospitalization rates
-# Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
-#     x=alt.X('Month:O', sort=month_order,axis=alt.Axis(title='month-year')),
-#     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-#     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
-# )
-# st.altair_chart(Exposed.properties(width=1000, height=500).interactive())
+# Create bar chart for Exposed hospitalization rates
+Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
+    x=alt.X('Month:O', sort=month_order,axis=alt.Axis(title='month-year')),
+    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
+    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
+)
+
 
 # # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
@@ -175,6 +175,7 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
-st.altair_chart(Unexposed.properties(width=1000, height=500).interactive())
+layer_bars = alt.layer(Exposed, Unexposed)
+st.altair_chart(layer_bars.properties(width=1000, height=500).interactive())
 
 
