@@ -162,7 +162,7 @@ Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q',
             axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
-).properties(width=500, height=300)  # Set the width and height of the chart
+)  # Set the width and height of the chart
 
 # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
@@ -170,14 +170,14 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q',
             axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
-).properties(width=500, height=300)  # Set the width and height of the chart
+)  # Set the width and height of the chart
 
 # Create line chart for B.1.1.529 variant
 variant = alt.Chart(Prototype1).mark_line(color='red').encode(
     x=alt.X('Month:O', sort=month_order, axis=alt.Axis(title='month-year')),
     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
     tooltip=[alt.Tooltip('Variant:Q')]
-).properties(width=1000, height=300)  # Set the width and height of the chart
+)  # Set the width and height of the chart
 
 # Display the charts using st.altair_chart and Streamlit layout functions
 st.altair_chart(Exposed | Unexposed, use_container_width=True)
