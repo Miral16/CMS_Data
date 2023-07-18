@@ -252,7 +252,7 @@ fig_variant.update_layout(yaxis=dict(title='Variant Proportion', tickformat="", 
 fig_combined = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1)
 for trace in fig_variant.data:
     fig_combined.add_trace(trace, row=1, col=1)
-    for trace in fig_hospitalization.data:
+for trace in fig_hospitalization.data:
     fig_combined.add_trace(trace, row=2, col=1)
 
 # Configure the layout
