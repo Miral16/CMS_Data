@@ -185,7 +185,7 @@ fig_combined.add_trace(fig_exposed)
 fig_combined.add_trace(fig_unexposed)
 
 # Add line trace for the variant proportion
-# fig_combined.add_trace(fig_variant)
+fig_combined.add_trace(fig_variant)
 
 # Configure the left y-axis for hospitalization rates
 fig_combined.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=[0, 0.05], side='left', showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
