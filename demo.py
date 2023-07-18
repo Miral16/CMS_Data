@@ -6,6 +6,7 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
 import altair as alt
+from plotly.subplots import make_subplots
 
 ## Improting CSV File
 beneficiary = pd.read_csv("benificiary_d.csv")
