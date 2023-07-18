@@ -186,7 +186,7 @@ Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
 
 # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
-    x=alt.X('Month:O',sort=month_order, axis=alt.Axis(title='month-year')),
+    x=alt.X('Month:O',sort=sort_order, axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
