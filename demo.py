@@ -175,9 +175,8 @@ variant = alt.Chart(Prototype1).mark_line(color='red').encode(
     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
     tooltip=[alt.Tooltip('Variant:Q')]
 )
-st.altair_chart(variant.properties(width=1000, height=500).interactive())
 # Stack the bar charts
-layer_bars = alt.layer(Exposed, Unexposed)
+layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
 
 # # Show the stacked bar chart
-# st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
+st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
