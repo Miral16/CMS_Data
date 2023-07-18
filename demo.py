@@ -198,7 +198,7 @@ st.plotly_chart(fig_combined)
 
 
 # Create line chart for B.1.1.529 variant
-fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant'], line=dict(color='red'), name='B.1.1.529 Variant')
+fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant1'], line=dict(color='red'), name='B.1.1.529 Variant')
 
 # Create subplot for hospitalization rates
 fig_hospitalization = go.Figure()
