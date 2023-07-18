@@ -154,11 +154,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 Prototype1 = pd.read_csv("Prototype1.csv")
 
-# Create bar chart for Exposed hospitalization rates
-Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
-    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
-    y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
-    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
-)
+month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
 
-st.altair_chart(Exposed.properties(width=1000, height=500).interactive())
+Prototype1["Month"] = pd.Categorical(df["Month"], categories=custom_order, ordered=True)
+st.dataframe(Prototype1)
+
