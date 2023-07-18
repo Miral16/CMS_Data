@@ -181,8 +181,8 @@ fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant'], line=di
 fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
 
 # Add bar traces to the subplot for hospitalization rates
-fig_combined.add_trace(fig_exposed)
-fig_combined.add_trace(fig_unexposed)
+fig_combined.add_trace(fig_exposed, secondary_y=False)
+fig_combined.add_trace(fig_unexposed, secondary_y=False)
 
 # Add line trace for the variant proportion
 fig_combined.add_trace(fig_variant)
