@@ -157,7 +157,9 @@ Prototype1 = pd.read_csv("Prototype1.csv")
 month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
 
 fig_exposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Exposed Population (%)', opacity=0.4, color_discrete_sequence=['blue'], labels={'COVID 19 Hospitalization Rate in Exposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Exposed Hospitalization Rates')
-st.plotly_chart(fig_exposed)
+fig_unexposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Unexposed Population (%)', opacity=0.4, color_discrete_sequence=['green'], labels={'COVID 19 Hospitalization Rate in Unexposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Unexposed Hospitalization Rates')
+fig_combined = fig_exposed.add_traces(fig_unexposed.data)
+st.plotly_chart(fig_combined)
 
 
 
