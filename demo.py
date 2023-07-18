@@ -158,6 +158,7 @@ Prototype1 = pd.read_csv("Prototype1.csv")
 month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
     
 
+#######
 Prototype1["Month"] = pd.Categorical(Prototype1["Month"], categories=month_order, ordered=True)
 Prototype1 = Prototype1.drop(index=Prototype1.index[18:], inplace=False)
 
@@ -174,11 +175,11 @@ fig_variant7 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant7'], line=
 fig_hospitalization = go.Figure()
 
 # Add bar trace for exposed hospitalization rates
-fig_exposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Exposed Population (%)'], opacity=0.4, marker=dict(color='blue'), name='Exposed')
+fig_exposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Exposed Population (%)'], opacity=0.4, marker=dict(color='blue'), name='COVID Hospitalization Rate in Exposed Population')
 fig_hospitalization.add_trace(fig_exposed)
 
 # Add bar trace for unexposed hospitalization rates
-fig_unexposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Unexposed Population (%)'], opacity=0.4, marker=dict(color='green'), name='Unexposed')
+fig_unexposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Unexposed Population (%)'], opacity=0.4, marker=dict(color='green'), name='COVID Hospitalization Rate in Unexposed Population')
 fig_hospitalization.add_trace(fig_unexposed)
 
 # Configure the left y-axis for hospitalization rates
@@ -199,7 +200,7 @@ fig_combined.add_trace(fig_variant7)
 
 # Configure the right y-axis for the variant proportion
 y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
-fig_combined.update_layout(yaxis2=dict(title='B.1.1.529 Variant', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+fig_combined.update_layout(yaxis2=dict(title='Variant Proportion', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Merge both subplots
 fig_combined.update_traces(yaxis='y2')  # Align the variant line chart with the right y-axis
@@ -207,64 +208,7 @@ for trace in fig_hospitalization.data:
     fig_combined.add_trace(trace)
 
 # Configure the layout
-fig_combined.update_layout(title='COVID-19 Hospitalization Rates and B.1.1.529 Variant', xaxis_title='Month-Year', width=1000, height=500)
+fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600)
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
-
-
-
-
-
-# # Create line chart for B.1.1.529 variant
-# fig_variant1 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant1'], line=dict(color='red'), name='B.1.1.529 Variant')
-# fig_variant2 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant2'], line=dict(color='blue'), name='BA.1.1 Variant')
-# fig_variant3 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant3'], line=dict(color='green'), name='BA.2 Variant')
-# fig_variant4 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant4'], line=dict(color='grey'), name='BA.2.12.1 Variant')
-# fig_variant5 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant5'], line=dict(color='black'), name='BA.5 Variant')
-# fig_variant6 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant6'], line=dict(color='pink'), name='BQ.1.1 Variant')
-# fig_variant7 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant7'], line=dict(color='orange'), name='XBB.1.5 Variant')
-
-# # Create subplot for hospitalization rates
-# fig_hospitalization = go.Figure()
-
-# # Add bar trace for exposed hospitalization rates
-# fig_exposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Exposed Population (%)'], opacity=0.4, marker=dict(color='blue'), name='Exposed')
-# fig_hospitalization.add_trace(fig_exposed)
-
-# # Add bar trace for unexposed hospitalization rates
-# fig_unexposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Unexposed Population (%)'], opacity=0.4, marker=dict(color='green'), name='Unexposed')
-# fig_hospitalization.add_trace(fig_unexposed)
-
-# # Configure the left y-axis for hospitalization rates
-# y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
-# fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
-
-# # Create subplot for variant proportion
-# fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
-
-# # Add line trace for the variant proportion (B.1.1.529)
-# fig_combined.add_trace(fig_variant1)
-# fig_combined.add_trace(fig_variant2)
-# fig_combined.add_trace(fig_variant3)
-# fig_combined.add_trace(fig_variant4)
-# fig_combined.add_trace(fig_variant5)
-# fig_combined.add_trace(fig_variant6)
-# fig_combined.add_trace(fig_variant7)
-
-
-# # Configure the right y-axis for the variant proportion
-# # y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
-# # fig_combined.update_layout(yaxis2=dict(title='B.1.1.529 Variant', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
-
-# # Merge both subplots
-# fig_combined.update_traces(yaxis='y2')  # Align the variant line chart with the right y-axis
-# for trace in fig_hospitalization.data:
-#     fig_combined.add_trace(trace)
-
-# # Configure the layout
-# fig_combined.update_layout(title='COVID-19 Hospitalization Rates and Variants', xaxis_title='Month-Year', width=1000, height=500)
-
-# # Render the Plotly figure using Streamlit
-# st.plotly_chart(fig_combined)
-
