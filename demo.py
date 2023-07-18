@@ -263,4 +263,57 @@ fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Varia
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
 
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import streamlit as st
+
+# Your data and setup (replace this with your data)
+month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
+
+Prototype1["Month"] = pd.Categorical(Prototype1["Month"], categories=month_order, ordered=True)
+Prototype1 = Prototype1.drop(index=Prototype1.index[18:], inplace=False)
+
+# Create line chart for B.1.1.529 variant
+fig_variant1 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant1'], line=dict(color='red'), name='B.1.1.529 Variant')
+fig_variant2 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant2'], line=dict(color='blue'), name='BA.1.1 Variant')
+fig_variant3 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant3'], line=dict(color='green'), name='BA.2 Variant')
+fig_variant4 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant4'], line=dict(color='grey'), name='BA.2.12.1 Variant')
+fig_variant5 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant5'], line=dict(color='black'), name='BA.5 Variant')
+fig_variant6 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant6'], line=dict(color='pink'), name='BQ.1.1 Variant')
+fig_variant7 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant7'], line=dict(color='orange'), name='XBB.1.5 Variant')
+
+# Create line chart for hospitalization rates
+fig_hospitalization = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1, row_heights=[0.8, 0.2])
+fig_hospitalization.add_trace(go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Exposed Population (%)'], opacity=0.4, marker=dict(color='blue'), name='COVID Hospitalization Rate in Exposed Population'), row=1, col=1)
+fig_hospitalization.add_trace(go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Unexposed Population (%)'], opacity=0.4, marker=dict(color='green'), name='COVID Hospitalization Rate in Unexposed Population'), row=1, col=1)
+fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=[0, 0.05], showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+
+# Create line chart for variant proportion
+fig_variant = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1, row_heights=[0.8, 0.2])
+fig_variant.add_trace(fig_variant1, row=2, col=1)
+fig_variant.add_trace(fig_variant2, row=2, col=1)
+fig_variant.add_trace(fig_variant3, row=2, col=1)
+fig_variant.add_trace(fig_variant4, row=2, col=1)
+fig_variant.add_trace(fig_variant5, row=2, col=1)
+fig_variant.add_trace(fig_variant6, row=2, col=1)
+fig_variant.add_trace(fig_variant7, row=2, col=1)
+fig_variant.update_layout(yaxis=dict(title='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+
+# Combine both figures into a single subplot
+fig_combined = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1, row_heights=[0.8, 0.2])
+for trace in fig_hospitalization.data:
+    fig_combined.add_trace(trace, row=1, col=1)
+for trace in fig_variant.data:
+    fig_combined.add_trace(trace, row=2, col=1)
+
+# Configure the layout
+fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600,
+                           legend=dict(orientation='h', yanchor='bottom', y=-0.2, xanchor='center', x=0.5),
+                           margin=dict(l=50, r=50, t=100, b=80))
+
+# Render the Plotly figure using Streamlit
+st.plotly_chart(fig_combined)
+
+
 
