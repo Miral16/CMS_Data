@@ -208,7 +208,9 @@ for trace in fig_hospitalization.data:
     fig_combined.add_trace(trace)
 
 # Configure the layout
-fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600)
+fig_combined.update_layout(title='COVID Hospitalization Rate & Circulating Variants Over Time', xaxis_title='Month-Year', width=1200, height=600,
+                           legend=dict(orientation='h', yanchor='bottom', y=-0.2, xanchor='center', x=0.5),
+                           margin=dict(l=80, r=80, t=100, b=80))
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
