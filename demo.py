@@ -176,4 +176,4 @@ Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
 # layer_bars = alt.layer(Exposed, Unexposed)
 
 # # Show the stacked bar chart
-st.altair_chart(alt.layer(Exposed).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
+st.altair_chart(Exposed.properties(width=1000, height=500).interactive())
