@@ -168,8 +168,11 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
+
 layer_bars = alt.layer(Exposed, Unexposed)
+
 st.altair_chart(layer_bars.properties(width=1000, height=500).interactive())
+
 # # Create line chart for B.1.1.529 variant
 # variant = alt.Chart(Prototype1).mark_line(color='red').encode(
 #     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
