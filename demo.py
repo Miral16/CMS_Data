@@ -163,5 +163,40 @@ fig_combined = fig_exposed.add_traces(fig_unexposed.data).add_traces(fig_variant
 st.plotly_chart(fig_combined)
 
 
+# Create bar chart for Exposed hospitalization rates
+fig_exposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Exposed Population (%)', opacity=0.4, color_discrete_sequence=['blue'], labels={'COVID 19 Hospitalization Rate in Exposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Exposed Hospitalization Rates')
+
+# Create bar chart for Unexposed hospitalization rates
+fig_unexposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Unexposed Population (%)', opacity=0.4, color_discrete_sequence=['green'], labels={'COVID 19 Hospitalization Rate in Unexposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Unexposed Hospitalization Rates')
+
+# Create line chart for B.1.1.529 variant
+fig_variant = px.line(Prototype1, x='Month', y='Variant', line_shape='linear', color_discrete_sequence=['red'], labels={'Variant': 'B.1.1.529 Variant'}, title='B.1.1.529 Variant')
+
+# Update the layout to display two y-axes
+fig_combined = go.Figure()
+
+# Add bar traces to the figure for hospitalization rates
+fig_combined.add_traces(fig_exposed.data)
+fig_combined.add_traces(fig_unexposed.data)
+
+# Configure the left y-axis for hospitalization rates
+fig_combined.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)'))
+
+# Add line trace for the variant proportion
+fig_combined.add_trace(fig_variant.data[0])
+
+# Configure the right y-axis for the variant proportion
+fig_combined.update_layout(
+    yaxis2=dict(
+        title='B.1.1.529 Variant Proportion',
+        overlaying='y',
+        side='right'
+    )
+)
+
+# Render the Plotly figure using Streamlit
+st.plotly_chart(fig_combined)
+
+
 
 
