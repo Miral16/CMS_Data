@@ -183,8 +183,8 @@ variant = alt.Chart(Prototype1).mark_line(color='red').encode(
 st.altair_chart(Exposed | Unexposed, use_container_width=True)
 st.altair_chart(variant, use_container_width=True)
 
-combined_chart = alt.hconcat(alt.vconcat(Exposed, Unexposed), variant)
-st.altair_chart(combined_chart.resolve_scale(y='independent'), use_container_width=True)
+layer_bars = alt.layer(Exposed, Unexposed)
+st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
 
 
 
