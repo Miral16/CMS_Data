@@ -233,9 +233,6 @@ fig_variant5 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant5'], line=
 fig_variant6 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant6'], line=dict(color='pink'), name='BQ.1.1 Variant')
 fig_variant7 = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant7'], line=dict(color='orange'), name='XBB.1.5 Variant')
 
-# Update x and y axis titles for the variant chart
-fig_variant.update_xaxes(title_text='Month-Year')
-fig_variant.update_yaxes(title_text='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Create line chart for hospitalization rates
 fig_hospitalization = make_subplots(specs=[[{"secondary_y": True}]])
@@ -252,7 +249,10 @@ fig_variant.add_trace(fig_variant4)
 fig_variant.add_trace(fig_variant5)
 fig_variant.add_trace(fig_variant6)
 fig_variant.add_trace(fig_variant7)
-fig_variant.update_layout(yaxis=dict(title='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
+# Update x and y axis titles for the variant chart
+fig_variant.update_xaxes(title_text='Month-Year')
+fig_variant.update_yaxes(title_text='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
+# fig_variant.update_layout(yaxis=dict(title='Variant Proportion', tickformat="", range=[0, 50], overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Combine both figures into a single subplot
 fig_combined = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1)
