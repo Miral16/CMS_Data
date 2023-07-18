@@ -191,7 +191,7 @@ fig_combined.add_trace(fig_variant)
 fig_combined.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickformat=".1f", range=[0, max(Prototype1['COVID 19 Hospitalization Rate in Exposed Population (%)'].max(), Prototype1['COVID 19 Hospitalization Rate in Unexposed Population (%)'].max())], side='left', showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Configure the right y-axis for the variant proportion
-fig_combined.update_yaxes(title_text='B.1.1.529 Variant Proportion', tickformat=".2%", range=[0, Prototype1['Variant'].max() * 1.2], side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
+fig_combined.update_yaxes(title_text='B.1.1.529 Variant', tickformat="", range=[0, Prototype1['Variant'].max() * 1.2], side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
 
 # Configure the layout
 fig_combined.update_layout(title='COVID-19 Hospitalization Rates and B.1.1.529 Variant', xaxis_title='Month-Year', width=1000, height=500)
