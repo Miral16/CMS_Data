@@ -176,7 +176,7 @@ variant = alt.Chart(Prototype1).mark_line(color='red').encode(
     tooltip=[alt.Tooltip('Variant:Q')]
 )
 # Stack the bar charts
-layer_bars = alt.layer(Exposed, Unexposed).resolve_scale(y='independent')
+layer_bars = alt.layer(Exposed, Unexposed)
 
 # # Show the stacked bar chart
 st.altair_chart(alt.layer(layer_bars,variant).resolve_scale(y='independent').properties(width=1000, height=500).interactive())
