@@ -197,8 +197,10 @@ Unexposed1 = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
     y2='baseline',  # This sets the bottom of the bars to a baseline value
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
+baseline = pd.DataFrame({'baseline': [0]})
+layer_bars = alt.layer(Exposed, Unexposed, data=baseline, height=400)
 
-st.altair_chart(Unexposed1.properties(width=1000, height=500).interactive())
+st.altair_chart(layer_bars.properties(width=1000, height=500).interactive())
 
 
 
