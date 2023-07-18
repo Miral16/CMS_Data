@@ -184,7 +184,7 @@ fig_hospitalization.add_trace(fig_unexposed)
 
 # Configure the left y-axis for hospitalization rates
 y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
-fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%",side='left', range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True.
+fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%",side='left', range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True,
                                             legend=dict(orientation='h', yanchor='top', y=-0.4, xanchor='center', x=0.5)))
 
 # Create subplot for variant proportion
