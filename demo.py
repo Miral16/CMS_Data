@@ -6,13 +6,16 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
 import altair as alt
+
 ## Improting CSV File
 beneficiary = pd.read_csv("benificiary_d.csv")
 Prototype = pd.read_csv("Prototype.csv")
 Prototype1 = pd.read_csv("Prototype1.csv")
+
 ## Setting Up Title of Dashboad
 st.set_page_config(page_title="Demographic Distribution of CMS Beneficiary Data", layout="wide")
 st.markdown(f"<h1 style='text-align: left; color: #00008B; width:1360px; height : 100px '>Demographic Distribution of CMS Beneficiary Data</h1>",unsafe_allow_html=True)
+
 ## Filtering Options
 with st.sidebar:
     st.markdown(
@@ -35,6 +38,7 @@ with st.sidebar:
     if 'All' not in options3:
             filtered_df = filtered_df[filtered_df['RACE'].isin(options3)]
 df = filtered_df.drop_duplicates(subset=["DESYNPUF_ID"], keep='first')
+
 ## Statistics
     
 style = """
@@ -55,6 +59,7 @@ div[data-testid="metric-container"] {
 """
 st.write('<style>{}</style>'.format(style), unsafe_allow_html=True)
 st.metric("Number of Unique Patients",f"{len(df['DESYNPUF_ID'].unique())}")
+
 ## Individual Graphs
 col1, col2 = st.columns(2)
 with col1:
@@ -97,6 +102,7 @@ with col2:
 #     fig2.update_layout(xaxis_title='Age Interval', yaxis_title='Percentage'
 # )
 #     st.plotly_chart(fig2)
+
 # Calculate hospitalization rates as percentages
 Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Exposed Population (%)'] / 100
 Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] = Prototype['COVID 19 Hospitalization Rate in Unexposed Population (%)'] / 100
@@ -145,6 +151,9 @@ fig.update_layout(
 )
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
+
+
+
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
