@@ -191,7 +191,7 @@ Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
 variant = alt.Chart(Prototype1).mark_line(color='red').encode(
     x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('B.1.1.529 :Q', axis=alt.Axis(title='variant proportion')),
-    tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate for B.1.1.529 Variant (%):Q')]
+    tooltip=[alt.Tooltip('B.1.1.529 :Q')]
 )
 
 
