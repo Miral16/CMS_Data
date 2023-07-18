@@ -156,7 +156,7 @@ Prototype1 = pd.read_csv("Prototype1.csv")
 
 month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
 
-Prototype1["Month"] = pd.Categorical(df["Month"], categories=month_order, ordered=True)
+Prototype1["Month"] = pd.Categorical(Prototype1["Month"], categories=month_order, ordered=True)
 
 st.dataframe(Prototype1)
 
