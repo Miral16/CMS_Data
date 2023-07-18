@@ -205,11 +205,13 @@ st.plotly_chart(fig_combined)
 
 
 
+
+
 # Create line chart for B.1.1.529 variant
 fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant'], line=dict(color='red'), name='B.1.1.529 Variant')
 
 # Create subplot for hospitalization rates
-fig_hospitalization = make_subplots(specs=[[{"secondary_y": True}]])
+fig_hospitalization = go.Figure()
 
 # Add bar trace for exposed hospitalization rates
 fig_exposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Exposed Population (%)'], opacity=0.4, marker=dict(color='blue'), name='Exposed')
@@ -221,7 +223,7 @@ fig_hospitalization.add_trace(fig_unexposed)
 
 # Configure the left y-axis for hospitalization rates
 y1_range = [0, 0.05]  # Set the range to 0 to 5% for hospitalization rates
-fig_hospitalization.update_yaxes(title_text='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, side='left', showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
+fig_hospitalization.update_layout(yaxis=dict(title='COVID 19 Hospitalization Rate (%)', tickformat=".2%", range=y1_range, showgrid=True, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Create subplot for variant proportion
 fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
@@ -231,17 +233,19 @@ fig_combined.add_trace(fig_variant)
 
 # Configure the right y-axis for the variant proportion
 y2_range = [0, 50]  # Set the range to 0 to 50 for variant proportion
-fig_combined.update_yaxes(title_text='B.1.1.529 Variant', tickformat="", range=y2_range, side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True)
+fig_combined.update_layout(yaxis2=dict(title='B.1.1.529 Variant', tickformat="", range=y2_range, overlaying='y', side='right', showgrid=False, zeroline=False, showline=True, linewidth=2, linecolor='black', mirror=True))
 
 # Merge both subplots
 fig_combined.update_traces(yaxis='y2')  # Align the variant line chart with the right y-axis
-fig_combined.add_traces(fig_hospitalization.data)
+for trace in fig_hospitalization.data:
+    fig_combined.add_trace(trace)
 
 # Configure the layout
 fig_combined.update_layout(title='COVID-19 Hospitalization Rates and B.1.1.529 Variant', xaxis_title='Month-Year', width=1000, height=500)
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
+
 
 
 
