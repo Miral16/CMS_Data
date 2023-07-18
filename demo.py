@@ -163,7 +163,7 @@ Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
 
-st.altair_chart(Exposed.properties(width=1000, height=500).interactive())
+st.alt_chart(Exposed.properties(width=1000, height=500).interactive())
 
 # # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
