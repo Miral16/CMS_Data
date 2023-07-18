@@ -152,15 +152,9 @@ fig.update_layout(
 # Display the chart using Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-# Define the custom order of months
-custom_month_order = ['Jan-22','Feb-22']
-
-# Convert the 'Month' column to categorical with the custom order
-Prototype1['Month1'] = pd.Categorical(Prototype1['Month'], categories=custom_month_order, ordered=True)
-
 # Create bar chart for Exposed hospitalization rates
 Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
-    x=alt.X('Month1:O', axis=alt.Axis(title='month-year')),
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Exposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Exposed Population (%):Q')]
 )
@@ -168,14 +162,14 @@ Exposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='blue').encode(
 
 # Create bar chart for Unexposed hospitalization rates
 Unexposed = alt.Chart(Prototype1).mark_bar(opacity=0.4, color='green').encode(
-    x=alt.X('Month1:O', axis=alt.Axis(title='month-year')),
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('COVID 19 Hospitalization Rate in Unexposed Population (%):Q', axis=alt.Axis(title='COVID 19 Hospitalization Rate (%)')),
     tooltip=[alt.Tooltip('COVID 19 Hospitalization Rate in Unexposed Population (%):Q')]
 )
 
 # Create line chart for B.1.1.529 variant
 variant = alt.Chart(Prototype1).mark_line(color='red').encode(
-    x=alt.X('Month1:O', axis=alt.Axis(title='month-year')),
+    x=alt.X('Month:O', axis=alt.Axis(title='month-year')),
     y=alt.Y('Variant:Q', axis=alt.Axis(title='B.1.1.529 Variant')),
     tooltip=[alt.Tooltip('Variant:Q')]
 )
