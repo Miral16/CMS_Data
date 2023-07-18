@@ -157,13 +157,6 @@ Prototype1 = pd.read_csv("Prototype1.csv")
 
 month_order = ["Jan-22","Feb-22","Mar-22","Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Apr-23","May-23","Jun-23"]
 
-fig_exposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Exposed Population (%)', opacity=0.4, color_discrete_sequence=['blue'], labels={'COVID 19 Hospitalization Rate in Exposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Exposed Hospitalization Rates')
-fig_unexposed = px.bar(Prototype1, x='Month', y='COVID 19 Hospitalization Rate in Unexposed Population (%)', opacity=0.4, color_discrete_sequence=['green'], labels={'COVID 19 Hospitalization Rate in Unexposed Population (%)': 'COVID 19 Hospitalization Rate (%)'}, title='Unexposed Hospitalization Rates')
-fig_variant = px.line(Prototype1, x='Month', y='Variant', line_shape='linear', color_discrete_sequence=['red'], labels={'Variant': 'B.1.1.529 Variant'}, title='B.1.1.529 Variant')
-fig_combined = fig_exposed.add_traces(fig_unexposed.data).add_traces(fig_variant.data)
-st.plotly_chart(fig_combined)
-
-
 
 Prototype1["Month"] = pd.Categorical(Prototype1["Month"], categories=month_order, ordered=True)
 Prototype1 = Prototype1.drop(index=Prototype1.index[18:], inplace=False)
@@ -175,7 +168,7 @@ fig_exposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalizati
 fig_unexposed = go.Bar(x=Prototype1['Month'], y=Prototype1['COVID 19 Hospitalization Rate in Unexposed Population (%)'], opacity=0.4, marker=dict(color='green'), name='Unexposed', yaxis='y1')
 
 # Create line chart for B.1.1.529 variant
-fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant'], line=dict(color='red'), name='B.1.1.529 Variant', yaxis='y2')
+fig_variant = go.Scatter(x=Prototype1['Month'], y=Prototype1['Variant1'], line=dict(color='red'), name='B.1.1.529 Variant', yaxis='y2')
 
 # Combine the charts into a subplot
 fig_combined = make_subplots(specs=[[{"secondary_y": True}]])
