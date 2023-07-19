@@ -12,7 +12,7 @@ from plotly.subplots import make_subplots
 beneficiary = pd.read_csv("benificiary_d.csv")
 Prototype = pd.read_csv("Prototype.csv")
 Prototype2 = pd.read_csv("Prototype2.csv")
-st.dataframe(Prototype2)
+# st.dataframe(Prototype2)
 
 
 # ## Setting Up Title of Dashboad
