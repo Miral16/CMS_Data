@@ -290,7 +290,7 @@ def main():
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
         resampled_data = Prototype2.resample('W', on='Date').sum()
-         tick_format = "%b %d, %Y"
+        tick_format = "%b %d, %Y"
     elif interval == "Bi-Weekly":
         resampled_data = Prototype2.resample('2W', on='Date').sum()
         tick_format = "%b %d, %Y"  # Format for bi-weekly ticks
