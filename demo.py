@@ -298,7 +298,7 @@ def main():
         resampled_data = Prototype2.resample('Y', on='Row Labels').sum()
     
     # Plot the line chart
-    fig = px.line(resampled_data, x='Weekly Date', y='Variant Proportion', title=f"Variant Proportion ({interval})")
+    fig = px.line(resampled_data, x='Row Labels', y='Variant Proportion', title=f"Variant Proportion ({interval})")
     st.plotly_chart(fig)
 
 if __name__ == "__main__":
