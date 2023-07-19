@@ -11,6 +11,7 @@ from plotly.subplots import make_subplots
 ## Improting CSV File
 beneficiary = pd.read_csv("benificiary_d.csv")
 Prototype = pd.read_csv("Prototype.csv")
+Prototype2 = pd.read_excel("Prototype2.csv.xlsx")
 
 
 ## Setting Up Title of Dashboad
@@ -274,6 +275,33 @@ fig_combined.update_yaxes(title_text="Variant Proportion", row=1, col=1)
 
 # Render the Plotly figure using Streamlit
 st.plotly_chart(fig_combined)
+
+
+def main():
+    st.title("Variant Proportion Over Time")
+    st.sidebar.title("Options")
+    st.sidebar.markdown("Select the time interval:")
+    interval = st.sidebar.selectbox("Interval", ["Weekly", "Bi-Weekly", "Monthly", "Yearly"])
+    
+    # Convert the date column to datetime if it's not already
+    Prototype2['Row Labels'] = pd.to_datetime(Prototype2['Row Labels'])
+    
+    # Apply the appropriate resampling based on the selected interval
+    if interval == "Weekly":
+        resampled_data = Prototype2.resample('W', on='Row Labels').sum()
+    elif interval == "Bi-Weekly":
+        resampled_data = Prototype2.resample('2W', on='Row Labels').sum()
+    elif interval == "Monthly":
+        resampled_data = Prototype2.resample('M', on='Row Labels').sum()
+    elif interval == "Yearly":
+        resampled_data = Prototype2.resample('Y', on='Row Labels').sum()
+    
+    # Plot the line chart
+    fig = px.line(resampled_data, x='Weekly Date', y='Variant Proportion', title=f"Variant Proportion ({interval})")
+    st.plotly_chart(fig)
+
+if __name__ == "__main__":
+    main()
 
 
 
