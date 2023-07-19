@@ -297,7 +297,7 @@ def main():
         resampled_data = Prototype2.resample('M', on='Date').sum()
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Date').sum()
-    
+    st.dataframe(resampled_data)
     # Plot the line chart
     fig = px.line(resampled_data, x='Date', y='Variant Proportion', title=f"Variant Proportion ({interval})")
     st.plotly_chart(fig)
