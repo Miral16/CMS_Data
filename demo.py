@@ -304,7 +304,7 @@ def main():
     st.dataframe(resampled_data)
     
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['Variant Proportion'],
+    fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['B.1.1.529 Variant Proportion'],
                              mode='lines+markers', name='Variant Proportion'))
 
     # Set the layout properties for the line chart
