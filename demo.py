@@ -305,7 +305,7 @@ def main():
     fig.update_layout(title=f"Variant Proportion ({interval})",
                       xaxis_title='Date',
                       yaxis_title='Variant Proportion',
-                      width=800,  # Adjust the width as per your preference
+                      width=1000,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
                       hovermode='x')
 
