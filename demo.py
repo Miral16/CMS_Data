@@ -313,7 +313,15 @@ def main():
                       yaxis_title='Variant Proportion',
                       width=800,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
-                      hovermode='x',xaxis_tickformat=tick_format)
+                      hovermode='x',
+                      xaxis_tickformat=tick_format,
+                      legend=dict(
+                          x=0.02,
+                          y=0.98,
+                          bgcolor='rgba(255, 255, 255, 0.8)',
+                          bordercolor='rgba(0, 0, 0, 0.8)',
+                          borderwidth=1
+                      ))
 
     st.plotly_chart(fig)
 
