@@ -306,6 +306,12 @@ def main():
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['B.1.1.529 Variant Proportion'],
                              mode='lines+markers', name='B.1.1.529 Variant Proportion',showlegend=True))
+    fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['B.1.617.2 Variant Proportion'],
+                             mode='lines+markers', name='B.1.617.2 Variant Proportion',showlegend=True))
+    fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['BA.1.1 Variant Proportion'],
+                             mode='lines+markers', name='BA.1.1 Variant Proportion',showlegend=True))
+    fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['BA.2 Variant Proportion'],
+                             mode='lines+markers', name='BA.2 Variant Proportion',showlegend=True))
 
     # Set the layout properties for the line chart
     fig.update_layout(title=f"Variant Proportion ({interval})",
