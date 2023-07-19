@@ -321,7 +321,7 @@ def main():
                       height=500,  # Adjust the height as per your preference
                       hovermode='x',
                       xaxis_tickformat=tick_format,legend=dict(
-                          x=0.5,
+                          x=0.9,
                           y=1.1,
                           xanchor='center',
                           yanchor='top')
