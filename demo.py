@@ -314,7 +314,12 @@ def main():
                       width=800,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
                       hovermode='x',
-                      xaxis_tickformat=tick_format,
+                      xaxis_tickformat=tick_format,legend=dict(
+                          x=0.5,
+                          y=1.1,
+                          xanchor='center',
+                          yanchor='top'
+                      ))
                      )
 
     st.plotly_chart(fig)
