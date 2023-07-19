@@ -285,20 +285,20 @@ def main():
     interval = st.sidebar.selectbox("Interval", ["Weekly", "Bi-Weekly", "Monthly", "Yearly"])
     
     # Convert the date column to datetime if it's not already
-    Prototype2['Row Labels'] = pd.to_datetime(Prototype2['Row Labels'])
+    Prototype2['Date'] = pd.to_datetime(Prototype2['Row Labels'])
     
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
-        resampled_data = Prototype2.resample('W', on='Row Labels').sum()
+        resampled_data = Prototype2.resample('W', on='Date').sum()
     elif interval == "Bi-Weekly":
-        resampled_data = Prototype2.resample('2W', on='Row Labels').sum()
+        resampled_data = Prototype2.resample('2W', on='Date').sum()
     elif interval == "Monthly":
-        resampled_data = Prototype2.resample('M', on='Row Labels').sum()
+        resampled_data = Prototype2.resample('M', on='Date').sum()
     elif interval == "Yearly":
-        resampled_data = Prototype2.resample('Y', on='Row Labels').sum()
+        resampled_data = Prototype2.resample('Y', on='Date').sum()
     
     # Plot the line chart
-    fig = px.line(resampled_data, x='Row Labels', y='Variant Proportion', title=f"Variant Proportion ({interval})")
+    fig = px.line(resampled_data, x='Date', y='Variant Proportion', title=f"Variant Proportion ({interval})")
     st.plotly_chart(fig)
 
 if __name__ == "__main__":
