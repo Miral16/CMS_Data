@@ -298,8 +298,18 @@ def main():
         resampled_data = Prototype2.resample('Y', on='Date').sum()
     st.dataframe(resampled_data)
     
-    # Plot the line chart
-    fig = px.line(resampled_data, x=resampled_data.index, y='Variant Proportion', title=f"Variant Proportion ({interval})")
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['Variant Proportion'],
+                             mode='lines+markers', name='Variant Proportion'))
+
+    # Set the layout properties for the line chart
+    fig.update_layout(title=f"Variant Proportion ({interval})",
+                      xaxis_title='Date',
+                      yaxis_title='Variant Proportion',
+                      width=800,  # Adjust the width as per your preference
+                      height=500,  # Adjust the height as per your preference
+                      hovermode='x')
+
     st.plotly_chart(fig)
 
 if __name__ == "__main__":
