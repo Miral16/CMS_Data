@@ -320,7 +320,7 @@ def main():
                           xanchor='center',
                           yanchor='top'
                       ))
-                     )
+                     
 
     st.plotly_chart(fig)
 
