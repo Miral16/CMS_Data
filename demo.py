@@ -317,7 +317,7 @@ def main():
                       xaxis_tickformat=tick_format,
                       legend=dict(
                           x=0.05,
-                          y=0.98,
+                          y=0.90,
                           bgcolor='rgba(255, 255, 255, 0.8)',
                           bordercolor='rgba(0, 0, 0, 0.8)',
                           borderwidth=1
