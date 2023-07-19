@@ -308,7 +308,8 @@ def main():
                       yaxis_title='Variant Proportion',
                       width=800,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
-                      hovermode='x')
+                      hovermode='x',
+                      xaxis_range=[resampled_data.index.min(), resampled_data.index.max()])
 
     st.plotly_chart(fig)
 
