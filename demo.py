@@ -290,13 +290,16 @@ def main():
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
         resampled_data = Prototype2.resample('W', on='Date').sum()
+        dtick = 'W'  # Set the tick frequency to weekly
     elif interval == "Bi-Weekly":
         resampled_data = Prototype2.resample('2W', on='Date').sum()
+        dtick = '2W'  # Set the tick frequency to bi-weekly
     elif interval == "Monthly":
         resampled_data = Prototype2.resample('M', on='Date').sum()
+        dtick = 'M'  # Set the tick frequency to monthly
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Date').sum()
-    st.dataframe(resampled_data)
+        dtick = 'Y'  # Set the tick frequency to yearly
     
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['Variant Proportion'],
@@ -309,7 +312,10 @@ def main():
                       width=800,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
                       hovermode='x',
-                      xaxis_range=[resampled_data.index.min(), resampled_data.index.max()])
+                     xaxis=dict(
+                          tickformat='%Y-%m-%d',  # Format the tick labels as desired
+                          dtick=dtick  # Set the tick frequency
+                      ))
 
     st.plotly_chart(fig)
 
