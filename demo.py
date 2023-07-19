@@ -286,6 +286,7 @@ def main():
     
     # Convert the date column to datetime if it's not already
     Prototype2['Date'] = pd.to_datetime(Prototype2['Date'])
+    st.dataframe(Prototype2)
     
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
@@ -296,6 +297,7 @@ def main():
         resampled_data = Prototype2.resample('M', on='Date').sum()
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Date').sum()
+
     
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['Variant Proportion'],
