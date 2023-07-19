@@ -316,7 +316,7 @@ def main():
                       hovermode='x',
                       xaxis_tickformat=tick_format,
                       legend=dict(
-                          x=0.02,
+                          x=0.05,
                           y=0.98,
                           bgcolor='rgba(255, 255, 255, 0.8)',
                           bordercolor='rgba(0, 0, 0, 0.8)',
