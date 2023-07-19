@@ -308,10 +308,6 @@ def main():
                       width=800,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
                       hovermode='x')
-    # Set the custom date tick labels for the x-axis
-    x_labels = resampled_data.index.strftime('%b %d, %Y').tolist()
-    x_tickvals = np.arange(len(resampled_data.index))
-    fig.update_layout(xaxis=dict(tickmode='array', tickvals=x_tickvals, ticktext=x_labels))
 
     st.plotly_chart(fig)
 
