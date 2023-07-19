@@ -296,8 +296,6 @@ def main():
         resampled_data = Prototype2.resample('M', on='Row Labels').sum()
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Row Labels').sum()
-
-    st.dataframe(resampled_data)
     
     # Plot the line chart
     fig = px.line(resampled_data, x='Row Labels', y='Variant Proportion', title=f"Variant Proportion ({interval})")
