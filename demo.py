@@ -286,7 +286,7 @@ def main():
     
     # Convert the date column to datetime if it's not already
     Prototype2['Date'] = pd.to_datetime(Prototype2['Date']).dt.date
-    st.dataframe(Date)
+    st.dataframe(Prototype2)
     
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
