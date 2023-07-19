@@ -286,18 +286,21 @@ def main():
     
     # Convert the date column to datetime if it's not already
     Prototype2['Date'] = pd.to_datetime(Prototype2['Date'])
-    st.dataframe(Prototype2)
     
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
         resampled_data = Prototype2.resample('W', on='Date').sum()
+         tick_format = "%b %d, %Y"
     elif interval == "Bi-Weekly":
         resampled_data = Prototype2.resample('2W', on='Date').sum()
+        tick_format = "%b %d, %Y"  # Format for bi-weekly ticks
     elif interval == "Monthly":
         resampled_data = Prototype2.resample('M', on='Date').sum()
+        tick_format = "%b %Y"  # Format for monthly ticks
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Date').sum()
-
+        tick_format = "%Y"  # Format for yearly ticks
+        st.dataframe(resampled_data)
     
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['Variant Proportion'],
@@ -309,7 +312,7 @@ def main():
                       yaxis_title='Variant Proportion',
                       width=800,  # Adjust the width as per your preference
                       height=500,  # Adjust the height as per your preference
-                      hovermode='x')
+                      hovermode='x',xaxis_tickformat=tick_format)
 
     st.plotly_chart(fig)
 
