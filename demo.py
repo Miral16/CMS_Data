@@ -286,8 +286,6 @@ def main():
     
     # Convert the date column to datetime if it's not already
     Prototype2['Date'] = pd.to_datetime(Prototype2['Date'])
-    st.dataframe(Prototype2)
-    Prototype2['Date'].set_index('Date', inplace=True)
     
     # Apply the appropriate resampling based on the selected interval
     if interval == "Weekly":
@@ -299,8 +297,9 @@ def main():
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Date').sum()
     st.dataframe(resampled_data)
+    
     # Plot the line chart
-    fig = px.line(resampled_data, x='Date', y='Variant Proportion', title=f"Variant Proportion ({interval})")
+    fig = px.line(resampled_data, x=resampled_data.index, y='Variant Proportion', title=f"Variant Proportion ({interval})")
     st.plotly_chart(fig)
 
 if __name__ == "__main__":
