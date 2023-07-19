@@ -285,7 +285,7 @@ def main():
     interval = st.sidebar.selectbox("Interval", ["Weekly", "Bi-Weekly", "Monthly", "Yearly"])
     
     # Convert the date column to datetime if it's not already
-    Prototype2['Date'] = pd.to_datetime(Prototype2['Date']).dt.date
+    Prototype2['Date'] = pd.to_datetime(Prototype2['Date'])
     st.dataframe(Prototype2)
     
     # Apply the appropriate resampling based on the selected interval
