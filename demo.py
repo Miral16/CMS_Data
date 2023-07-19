@@ -300,7 +300,8 @@ def main():
     elif interval == "Yearly":
         resampled_data = Prototype2.resample('Y', on='Date').sum()
         tick_format = "%Y"  # Format for yearly ticks
-        st.dataframe(resampled_data)
+    
+    st.dataframe(resampled_data)
     
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=resampled_data.index, y=resampled_data['Variant Proportion'],
