@@ -318,7 +318,12 @@ def main():
                           x=0.5,
                           y=1.1,
                           xanchor='center',
-                          yanchor='top'
+                          yanchor='top',
+                       xaxis=dict(
+                          tickmode='linear',
+                          tickangle=0,
+                          tickfont=dict(size=10),
+                          automargin=True
                       ))
                      
 
